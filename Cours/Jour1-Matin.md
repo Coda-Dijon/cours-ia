@@ -12,19 +12,22 @@ Poser le cadre, créer un climat de confiance, évaluer le niveau de la classe v
 
 ### Déroulé
 
-**Présentation de l'intervenant (5 min)**
+**Présentation (5 min)**
 
-Se présenter brièvement : parcours freelance, projets réalisés, rapport personnel à l'IA au quotidien. L'idée est de montrer que ce cours vient de l'expérience terrain, pas d'un manuel théorique. Mentionner un ou deux exemples concrets où l'IA a fait gagner du temps — et un où elle a fait perdre du temps.
+Se présenter brièvement : parcours freelance, rapport personnel à l'IA au quotidien. Un exemple où l'IA a fait gagner du temps, un où elle a fait perdre du temps. L'idée : ce cours vient du terrain, pas d'un manuel.
 
-**Tour de table (20 min)**
+**Prise de température collective (10 min)**
 
-Chaque étudiant répond à trois questions rapides (30 secondes chacun) :
+Pas de tour de table — on pose des questions ouvertes à la classe, ceux qui veulent répondre prennent la parole.
 
-1. **Prénom + ce qui t'intéresse dans le dev**
-2. **Tu utilises déjà l'IA pour coder ? Si oui, laquelle ?** (ChatGPT, Copilot, Gemini, rien…)
-3. **Donne un mot qui résume ton ressenti sur l'IA dans le dev** (magique, flippant, pratique, triche…)
+Questions à poser (dans l'ordre) :
 
-> **Note pour l'intervenant** : noter les mots-clés sur un tableau/post-it. Ils seront repris en fin de jour 2 pour mesurer l'évolution des perceptions.
+1. **"Qui utilise déjà l'IA pour coder ?"** — à main levée, pour jauger le niveau global.
+2. **"Ceux qui l'utilisent : vous utilisez quoi, et pour faire quoi ?"** — laisser 3-4 réponses spontanées (ChatGPT, Copilot, "je copie-colle le code"…).
+3. **"Et ceux qui ne l'utilisent pas — c'est un choix, ou juste pas eu l'occasion ?"** — ouvrir la parole à ceux qui n'osent pas.
+4. **"Si je vous dis 'IA dans le dev', quel est le premier mot qui vous vient ?"** — noter 5-6 mots-clés au tableau.
+
+> **Note pour l'intervenant** : les mots-clés notés seront repris en fin de jour 2 pour mesurer l'évolution des perceptions.
 
 **Cadrage du cours (5 min)**
 
@@ -158,9 +161,9 @@ Un LLM, c'est un programme qui a "lu" des milliards de pages web, de livres, de 
 
 Ouvrir ChatGPT, Gemini ou n'importe quel LLM et poser deux fois exactement la même question :
 
-> "Écris une fonction PHP qui vérifie si un nombre est pair."
+> "Écris un poème de 4 vers sur la programmation."
 
-Montrer que les deux réponses sont différentes : noms de variables différents, structure différente, parfois commentaires différents. Demander aux étudiants : "Comment est-ce possible si c'est le même programme qui reçoit la même entrée ?"
+Montrer que les deux réponses sont différentes : mots différents, structure différente, rimes différentes. Demander aux étudiants : "Comment est-ce possible si c'est le même programme qui reçoit la même entrée ?"
 
 La réponse : à chaque mot, l'IA calcule une probabilité pour le mot suivant. Au lieu de toujours prendre le plus probable, elle "lance un dé pondéré". C'est ce qu'on appelle le **sampling**. Le paramètre qui contrôle ça s'appelle la **température** :
 
@@ -381,33 +384,11 @@ Parce que ça change complètement la façon dont on utilise l'outil :
 
 ---
 
-#### 8. L'attention — le mécanisme qui connecte tout (5 min)
+#### 8. L'attention — la notion clé (2 min)
 
-C'est **le** concept clé de l'architecture Transformer (la techno derrière tous les LLM modernes, inventée par Google en 2017).
+Le mécanisme d'**attention** est le concept central de l'architecture Transformer (la techno derrière tous les LLM modernes, inventée par Google en 2017). En résumé : chaque mot du texte peut "regarder" tous les autres mots et décider lesquels sont importants pour lui. C'est ce qui permet à l'IA de relier des éléments éloignés — par exemple, comprendre que dans "Le chat qui dormait sur le canapé a renversé le vase", c'est bien *le chat* qui a renversé le vase, pas le canapé.
 
-**Le problème que l'attention résout** :
-
-Prenez cette phrase : "Le chat qui dormait sur le canapé du salon a renversé le vase."
-
-Pour comprendre que c'est *le chat* qui a renversé le vase (et pas le canapé ou le salon), il faut relier des mots éloignés. C'est ce que fait le mécanisme d'attention.
-
-**Analogie** : chaque mot de la phrase peut "regarder" tous les autres mots et décider lesquels sont importants pour lui.
-
-```
-"Le chat qui dormait sur le canapé du salon a renversé le vase"
-
-Le mot "renversé" attribue un "score d'attention" :
-  "chat"     → score élevé (c'est le sujet !)
-  "dormait"  → score moyen (ça décrit le chat)
-  "canapé"   → score faible (pas directement lié)
-  "vase"     → score élevé (c'est l'objet)
-```
-
-**Pourquoi c'est important pour le dev** :
-
-- L'attention permet à l'IA de "comprendre" que `$result` à la ligne 50 fait référence à la variable définie à la ligne 3.
-- Mais l'attention a une portée limitée (la fenêtre de contexte). Si la définition est trop loin, l'IA peut perdre le lien.
-- C'est pour ça que les **rules** (qu'on verra demain) sont si importantes : elles mettent le contexte *au début* de chaque interaction, là où l'attention est la plus forte.
+Ce qu'il faut retenir : l'attention a une portée limitée (la fenêtre de contexte). Plus le contexte est long, plus l'IA peut perdre le lien entre des éléments éloignés. C'est pour ça que les **rules** (qu'on verra demain) sont si importantes : elles mettent le contexte essentiel *au début* de chaque interaction.
 
 ---
 
@@ -472,6 +453,16 @@ npx @google/gemini-cli
 - Utiliser l'interface web de Gemini / ChatGPT / Claude comme fallback.
 - L'important est que chaque groupe ait au moins un outil IA fonctionnel.
 
+#### Et les autres outils CLI ? (2 min)
+
+Gemini CLI n'est pas le seul outil de ce type. Il en existe d'autres qui fonctionnent sur le même principe — un agent IA dans le terminal, capable de lire vos fichiers, d'écrire du code et d'exécuter des commandes :
+
+- **GitHub Copilot CLI** — l'équivalent de Microsoft/GitHub. Même logique : on lui parle, il lit le projet, il code. Il a ses propres "skills" (des capacités spécialisées) et peut lui aussi enchaîner des actions automatiquement. Un Dockerfile est fourni dans le dossier `Docker/` si vous voulez le tester.
+- **Claude Code** (Anthropic) — même approche, avec Claude comme modèle sous-jacent.
+- **Cursor, Windsurf, Cline…** — des éditeurs de code avec IA intégrée, qui font la même chose mais dans une interface graphique plutôt qu'un terminal.
+
+Ce qu'il faut retenir : les **principes** qu'on va apprendre (contexte, itération, spécification, relecture critique) s'appliquent à *tous* ces outils. On utilise Gemini CLI parce qu'il est gratuit et simple à installer, mais tout ce que vous apprendrez ici est transférable.
+
 #### Premier prompt (5 min)
 
 Démo live : ouvrir un terminal, lancer Gemini CLI, et taper :
@@ -500,7 +491,7 @@ Faire vivre aux étudiants l'expérience d'utiliser l'IA sans méthode pour qu'i
 
 **Formation des groupes** : 3-4 étudiants par groupe. Mélanger les niveaux si possible.
 
-**Distribution du code de base** : chaque groupe reçoit les fichiers PHP du projet de flashcards (voir [Annexe — Code de base](#annexe-code)).
+**Distribution du code de base** : chaque groupe reçoit les fichiers PHP du projet de flashcards (voir [Annexe — Code de base](../Bonus/Annexes.md#annexe-code)).
 
 Le code de base contient :
 

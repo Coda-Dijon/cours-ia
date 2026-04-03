@@ -4,7 +4,13 @@
  */
 
 // Chemin du fichier de sauvegarde
-define('DATA_FILE', __DIR__ . '/cards.json');
+// En mode web (Apache), le volume Docker monté n'est pas accessible en écriture.
+// On utilise /tmp pour la persistance côté serveur.
+if (php_sapi_name() === 'cli') {
+    define('DATA_FILE', __DIR__ . '/cards.json');
+} else {
+    define('DATA_FILE', '/tmp/flashcards_data.json');
+}
 
 /**
  * Retourne un jeu de cartes d'exemple pour démarrer

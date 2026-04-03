@@ -3,6 +3,11 @@
  * FlashCards CLI — Fonctions utilitaires
  */
 
+// Définir STDIN si la constante n'existe pas (ex: environnement non-CLI)
+if (!defined('STDIN')) {
+    define('STDIN', fopen('php://stdin', 'r'));
+}
+
 /**
  * Efface l'écran du terminal
  */

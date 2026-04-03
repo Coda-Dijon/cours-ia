@@ -9,7 +9,7 @@ Chaque groupe a maintenant :
 - Un fichier de rules ✓
 - Une spec écrite ✓
 - Un contexte clair ✓
-
+ groupe se voit attribuer un composant à explorer en profondeur (en plus de la vue d'ensemble) :
 **Présentation du challenge** :
 
 > "Vous allez implémenter la fonctionnalité que vous avez spécifiée ce matin. La méthode est libre, mais vous DEVEZ utiliser vos rules, votre spec, et l'approche itérative. Chaque membre du groupe doit pouvoir expliquer chaque ligne de code produite."
@@ -118,99 +118,17 @@ git clone --depth 1 https://github.com/symfony/symfony.git
 
 > "Vous débarquez en tant que contributeur junior sur le framework Symfony. Votre mission : comprendre comment ce monstre de 40+ composants est organisé, et être capable d'expliquer le cycle de vie d'une requête HTTP. Vous avez 25 minutes et l'IA comme guide. Mais attention : vous devez COMPRENDRE ce que l'IA vous explique, pas juste copier sa réponse."
 
-**Chaque groupe se voit attribuer un composant à explorer en profondeur** (en plus de la vue d'ensemble) :
-
-- Groupe A : **HttpKernel** — le cœur du framework (cycle requête → réponse)
-- Groupe B : **Routing** — comment une URL devient un contrôleur
-- Groupe C : **DependencyInjection** — le conteneur de services
-- Groupe D : **Security** — authentification et autorisation
-- Groupe E : **Console** — le système de commandes CLI
-- Groupe F : **EventDispatcher** — le système d'événements
-
-**Démarche guidée** — les étudiants doivent, avec l'aide de l'IA :
-
-1. **Cartographier l'architecture globale** : comprendre l'organisation Component / Bundle / Bridge / Contracts et pourquoi cette séparation
-2. **Plonger dans leur composant** : lire les classes principales, comprendre les interfaces clés, identifier les design patterns utilisés
-3. **Tracer le parcours d'une requête HTTP** : de l'entrée dans `public/index.php` → Kernel → EventDispatcher → Router → Controller → Response — chaque groupe éclaire la partie qui correspond à son composant
-4. **Identifier les design patterns** : observer comment le framework utilise Strategy, Observer, Factory, Decorator, etc. dans du vrai code de production
-
-**Prompts suggérés** (à afficher au tableau) :
-
-```
-"Voici l'arborescence du projet Symfony [coller un tree du dossier src/Symfony/].
-Explique-moi l'architecture : quelle est la différence entre Component, Bundle,
-Bridge et Contracts ? Pourquoi cette organisation ?"
-
-"Voici le fichier src/Symfony/Component/HttpKernel/HttpKernel.php [coller le code].
-Explique-moi étape par étape ce qui se passe quand la méthode handle() est appelée.
-Quels événements sont dispatchés et dans quel ordre ?"
-
-"Voici le fichier src/Symfony/Component/Routing/Router.php [coller le code].
-Comment le Router fait-il pour transformer une URL en contrôleur ?
-Quels design patterns sont utilisés ici ?"
-
-"Je vais te montrer plusieurs fichiers du composant [ton composant].
-Dessine-moi la chaîne de responsabilité : quelles classes appellent quelles autres,
-et dans quel ordre ?"
-```
-
-**Livrable** : un document de synthèse (Markdown) qui explique :
-- L'architecture globale de Symfony (dans les mots de l'étudiant)
-- Le rôle détaillé du composant attribué au groupe
-- Un schéma (même textuel) du parcours d'une requête HTTP, en mettant en valeur la partie correspondant à leur composant
-
 ### Phase 2 — Analyse technique approfondie (25 min)
 
 **Consigne** :
 
 > "Vous comprenez maintenant la structure. Passez en mode analyse : plongez dans le code de votre composant et décortiquez les choix d'architecture. Ce n'est pas un audit pour trouver des bugs — c'est du code écrit par des experts. L'objectif est de comprendre POURQUOI ils ont fait ces choix et ce que ça vous apprend."
 
-**Chaque groupe analyse son composant sous ces angles** :
-
-- **Design patterns** : quels patterns sont utilisés, pourquoi, et comment ils sont implémentés concrètement (pas la théorie — le vrai code)
-- **Extensibilité** : comment le composant est pensé pour être étendu sans être modifié (interfaces, événements, points d'extension)
-- **Découplage** : comment le composant reste indépendant des autres — quelles sont ses dépendances, comment utilise-t-il les Contracts
-- **Tests** : comment les tests sont organisés, quelles stratégies de test sont employées (mocks, fixtures, tests fonctionnels vs unitaires)
-- **Conventions** : nommage, organisation des fichiers, documentation inline — quelles conventions peut-on en tirer pour ses propres projets
-
-**Prompts suggérés** :
-
-```
-"Voici les fichiers du composant HttpKernel [coller les principaux].
-Quels design patterns sont utilisés ? Pour chacun, montre-moi le code exact
-qui l'implémente et explique pourquoi ce pattern a été choisi ici."
-
-"Voici l'interface RouterInterface.php et la classe Router.php [coller].
-Pourquoi avoir séparé l'interface du code ? Quels avantages concrets ça apporte
-pour quelqu'un qui utilise Symfony dans son projet ?"
-
-"Voici un fichier de test du composant Security [coller].
-Analyse la stratégie de test : qu'est-ce qui est testé, comment, et quels cas
-limites sont couverts ? Qu'est-ce que ça nous apprend sur la façon d'écrire
-de bons tests ?"
-
-"Compare l'organisation du composant Console avec celle du composant Routing.
-Quels points communs dans la structure ? Quelles conventions Symfony peut-on
-en déduire pour organiser son propre code ?"
-```
-
-**Livrable** : un mini-rapport d'analyse avec pour chaque point :
-- Le **choix d'architecture** observé (avec référence au code)
-- Le **pourquoi** de ce choix (avantage technique concret)
-- Une **leçon à retenir** pour leurs propres projets
+**Livrable** : un mini-rapport d'analyse avec pour chaque choix d'architecture observé, le pourquoi de ce choix et une leçon à retenir pour leurs propres projets.
 
 ### Mise en commun (5 min)
 
-Tour rapide : chaque groupe explique **son composant** aux autres en 1 minute. L'objectif : qu'en assemblant les présentations de tous les groupes, tout le monde ait une vision complète du parcours d'une requête dans Symfony.
-
-**L'intervenant relie les morceaux** : "Le groupe A nous a montré comment HttpKernel orchestre tout, le groupe B comment le Routing trouve le bon contrôleur, le groupe C comment le conteneur injecte les dépendances… Vous voyez comment chaque composant fait une seule chose, mais qu'ensemble ils forment un framework complet."
-
-**Points à souligner** :
-
-- Sans l'IA, explorer une codebase de cette taille prendrait des jours. Avec l'IA et les bonnes questions, vous avez compris l'essentiel en 25 minutes — c'est ça le vrai gain de productivité
-- Mais attention : l'IA vous a-t-elle parfois donné des explications que vous avez acceptées sans vérifier ? C'est le piège — sur un gros projet, les erreurs subtiles de l'IA sont plus difficiles à repérer
-- Les design patterns que vous avez observés (Strategy, Observer, Factory…) ne sont pas de la théorie abstraite — vous venez de voir comment ils sont utilisés dans du vrai code de production qui tourne sur des millions de sites
-- Ce workflow (explorer → comprendre → analyser) est exactement ce que vous ferez en arrivant en stage ou en alternance
+Tour rapide : chaque groupe explique **son composant** aux autres en 1 minute. L'intervenant relie les morceaux pour montrer la vision d'ensemble.
 
 ---
 

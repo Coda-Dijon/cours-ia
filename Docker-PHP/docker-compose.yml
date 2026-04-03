@@ -1,0 +1,9 @@
+services:
+  php:
+    build: .
+    container_name: php-cours-ia
+    ports:
+      - "8080:80"
+    volumes:
+      - ../Projet-FlashCards:/var/www/projet
+    restart: unless-stopped

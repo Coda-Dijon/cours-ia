@@ -1,0 +1,47 @@
+[
+    {
+        "question": "Quelle fonction affiche du texte dans le terminal en PHP ?",
+        "answer": "echo (ou print)",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Comment déclare-t-on une variable en PHP ?",
+        "answer": "Avec le symbole $ suivi du nom : $maVariable = valeur;",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Quelle est la différence entre == et === en PHP ?",
+        "answer": "== compare les valeurs (avec conversion de type), === compare les valeurs ET les types",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Comment parcourir un tableau avec une boucle en PHP ?",
+        "answer": "foreach ($tableau as $element) { ... } ou foreach ($tableau as $cle => $valeur) { ... }",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Quelle fonction retourne le nombre d'éléments d'un tableau ?",
+        "answer": "count($tableau)",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Que signifie PHP ?",
+        "answer": "PHP: Hypertext Preprocessor (acronyme récursif)",
+        "deck": "Culture Dev"
+    },
+    {
+        "question": "Quel mot-clé permet de définir une fonction en PHP ?",
+        "answer": "function nom_de_la_fonction($params) { ... }",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "Comment lire une saisie utilisateur en PHP CLI ?",
+        "answer": "fgets(STDIN) — retourne la ligne tapée par l'utilisateur",
+        "deck": "PHP Bases"
+    },
+    {
+        "question": "AAA",
+        "answer": "B",
+        "deck": "PHP Bases"
+    }
+]

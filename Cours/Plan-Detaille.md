@@ -35,7 +35,7 @@
 #### Après-midi (13h – 16h)
 
 **13h – 13h45 · Analyse collective des résultats**
-- Présentations par groupe + décorticage en live des 4 patterns : code trop sophistiqué, hallucination silencieuse, perte de cohérence, code verbeux
+- Présentations par groupe + identification des patterns typiques (code trop sophistiqué, hallucination silencieuse, perte de cohérence, code verbeux) comme sujets de discussion
 - Techniques concrètes de relecture : lecture à voix haute, checklist signaux d'alerte, test mental des edge cases, diff avec l'existant
 
 **13h45 – 14h15 · Limites et enjeux éthiques**
@@ -71,8 +71,7 @@
 #### Matin (9h – 12h)
 
 **9h – 9h30 · Le prompt itératif vs le one-shot**
-- Pourquoi le one-shot échoue, l'approche itérative en 4 étapes
-- Démo live sur le projet flashcards
+- Pourquoi le one-shot échoue (on oublie toujours des informations), l'approche itérative en 4 étapes
 - Bien signaler un bug : le triptyque attendu / observé / message d'erreur
 
 **9h30 – 10h · Spécifier avant de développer**
@@ -84,12 +83,12 @@
 **10h15 – 10h45 · Sessions d'échange avec l'IA**
 - Modèle mental : l'IA = dev intermédiaire, vous = lead technique
 - Techniques : "pose-moi des questions", canard en plastique amélioré, prompt défensif (critiquer son propre code)
-- Démo live : d'un besoin flou à une architecture claire, sans écrire une ligne de code
+- On le fera ensemble en cours
 
 **10h45 – 11h15 · Rules, outils et agents**
 - Fichiers de rules : concept, exemple FlashCards, GEMINI.md hiérarchique, équivalents (CLAUDE.md, .cursor/rules…)
 - Panorama des agents : Gemini CLI, Claude Code, Cursor, Copilot et autres
-- Fonctionnalités Gemini CLI : commandes slash, outils intégrés, sandbox, MCP
+- Fonctionnalités Gemini CLI : commandes slash, outils intégrés
 - Agents et orchestration : agent simple (mode agentic), sub-agents, multi-agents — le rôle du dev se déplace vers la spécification et la vérification
 
 **11h15 – 11h45 · Workflow réel + tests comme garde-fou**
@@ -111,9 +110,9 @@
 - L'intervenant circule et intervient cette fois
 
 **14h30 – 15h30 · Atelier — Explorer le framework Symfony avec l'IA**
-- Phase 1 (25 min) : comprendre la codebase — chaque groupe explore un composant (HttpKernel, Routing, DI, Security, Console, EventDispatcher), cartographie l'architecture, trace le parcours d'une requête
-- Phase 2 (25 min) : analyse technique — design patterns, extensibilité, découplage, tests, conventions
-- Mise en commun (5 min) : chaque groupe présente, l'intervenant relie les morceaux
+- Phase 1 (25 min) : comprendre la codebase — consigne + composant attribué par groupe
+- Phase 2 (25 min) : analyse technique approfondie — consigne + livrable attendu
+- Mise en commun (5 min) : tour rapide, l'intervenant relie les morceaux
 
 **15h30 – 15h50 · Temps libre encadré**
 - Appliquer la méthodologie au choix : améliorer les flashcards, refactorer le code du jour 1, explorer un autre repo, créer un outil CLI

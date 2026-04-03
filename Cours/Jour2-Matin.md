@@ -38,14 +38,11 @@ Prompt 4 : "Refactorise pour que le score soit persisté dans le JSON avec les c
         → On améliore par itération, pas par réécriture totale.
 ```
 
-### Démo live (10 min)
+### Ce qui se passe quand on fait un seul prompt
 
-Prendre un cas concret du projet de flashcards et le développer en live avec l'approche itérative. Montrer :
+Le piège du one-shot, c'est qu'on oublie toujours des informations. On pense avoir tout dit, mais en réalité on a laissé des zones d'ombre que l'IA va combler à sa façon — souvent mal. Un prompt unique de 10 lignes omet presque toujours le format des données, les conventions du projet, les cas limites, la gestion d'erreurs. Et on ne s'en rend compte qu'après, quand le code ne fait pas ce qu'on voulait.
 
-1. Qu'on commence par *discuter* du problème
-2. Qu'on valide chaque étape avant de passer à la suivante
-3. Qu'on peut revenir en arrière facilement
-4. Que le code final est compris parce qu'on l'a construit brique par brique
+L'approche itérative résout ça : en découpant en petites étapes, chaque oubli est rattrapé au prompt suivant.
 
 ### Les bénéfices
 
@@ -180,25 +177,6 @@ Faire la démo complète du workflow sur un cas concret :
 
 Montrer le résultat vs ce que le one-shot du jour 1 aurait donné.
 
-### Comment tester simplement en PHP CLI
-
-Les étudiants n'ont pas de framework de test, et ce n'est pas le sujet. Mais ils peuvent vérifier leur code très facilement :
-
-```bash
-# Tester une fonction isolée
-php -r "require 'functions.php'; require 'data.php'; var_dump(get_deck_names(load_cards()));"
-
-# Vérifier une structure de données
-php -r "require 'data.php'; print_r(load_cards());"
-
-# Vérifier un calcul
-php -r "require 'functions.php'; echo calculate_urgency(['level' => 2, 'last_reviewed' => '2025-03-28']) . PHP_EOL;"
-```
-
-**Réflexe à donner** : chaque fois que l'IA vous génère une fonction, testez-la isolément avant de l'intégrer. 30 secondes de test = 30 minutes de debug en moins.
-
-### Templates (à distribuer)
-
 #### Template de spec métier
 
 ```markdown
@@ -208,8 +186,8 @@ php -r "require 'functions.php'; echo calculate_urgency(['level' => 2, 'last_rev
 [Décrire l'expérience utilisateur, pas la technique]
 
 ## Règles métier
-- [Règle 1 : "Un sort consomme des points de mana"]
-- [Règle 2 : "Si le joueur n'a pas assez de MP, il ne peut pas lancer le sort"]
+- [Règle 1 : "Une bonne réponse monte le niveau de maîtrise de la carte"]
+- [Règle 2 : "Si toutes les cartes sont au niveau max, proposer une révision aléatoire"]
 - ...
 
 ## Cas limites
@@ -316,34 +294,7 @@ Une fois que l'IA a produit du code, utilisez-la aussi pour le challenger :
 
 > **Attention** : la critique de l'IA n'est pas parfaite non plus. Elle peut trouver des faux problèmes ou passer à côté de vrais bugs. C'est un outil supplémentaire, pas un remplacement de la relecture humaine.
 
-### Démo live (15 min)
-
-Partir d'un besoin flou et montrer comment une conversation avec l'IA fait émerger une solution claire.
-
-**Scénario** : "Je veux ajouter de la magie dans le jeu."
-
-```
-Moi : "Je veux ajouter un système de répétition espacée à mon outil de flashcards PHP CLI.
-       Actuellement, les cartes ont : question, answer, deck.
-       Comment structurer ça pour prioriser les cartes mal maîtrisées ?"
-
-IA  : [propose plusieurs approches : niveaux de maîtrise, intervalle fixe, algorithme SM-2...]
-
-Moi : "L'approche par niveaux de maîtrise (0 à 5) me plaît. Quelles données
-       faut-il ajouter à la structure de carte ?"
-
-IA  : [propose : level, last_reviewed, times_correct, times_wrong]
-
-Moi : "OK. Comment calculer quelles cartes sont 'urgentes' à réviser ?
-       Je veux quelque chose de simple, pas un algorithme complexe."
-
-IA  : [propose une formule : urgence = jours_depuis_révision × (6 - niveau)]
-
-Moi : "Bien. Maintenant, avant de coder quoi que ce soit, récapitule
-       l'architecture complète et les fonctions qu'il va falloir créer."
-
-IA  : [récap structuré = base de spec]
-```
+On fera un exercice de session d'échange ensemble en cours — pas besoin de le détailler ici, on le vivra en direct.
 
 **Message clé** : on n'a pas encore écrit une ligne de code, mais on a une vision claire de ce qu'on va construire. La session d'échange PRÉCÈDE le code.
 
@@ -400,15 +351,28 @@ Comprendre les mécanismes qui permettent de donner un contexte *persistant* à 
 
 ### Les skills et commandes
 
-**Ce que c'est** : des instructions pré-enregistrées pour des tâches récurrentes. Au lieu de retaper le même prompt, on crée un "raccourci".
+**Ce que c'est** : des instructions pré-enregistrées pour des tâches récurrentes. Au lieu de retaper le même prompt à chaque fois, on crée un "raccourci" réutilisable.
 
-**Exemples** :
+**Concrètement** : un skill, c'est un fichier texte qui contient un prompt + des instructions. Quand on l'invoque, l'IA reçoit ce contexte automatiquement. C'est comme un template de prompt qu'on peut partager et réutiliser.
 
-- `/review` → "Analyse ce code et liste les problèmes potentiels"
-- `/spec` → "Génère une spécification technique à partir de cette discussion"
-- `/test` → "Écris des cas de test pour cette fonction"
+**Exemples de skills qu'on pourrait créer pour notre projet FlashCards** :
 
-**Démo** : montrer comment créer un skill simple dans Gemini CLI.
+- `/review` → "Analyse ce code PHP et liste les problèmes potentiels : bugs, failles de sécurité, conventions non respectées"
+- `/spec` → "Génère une spécification technique à partir de cette discussion, au format du template qu'on a vu ce matin"
+- `/test` → "Écris des cas de test pour cette fonction en utilisant des assertions PHP simples"
+
+**Le même concept existe chez tous les outils** — c'est un pattern universel :
+
+| Outil | Nom du concept | Comment ça marche |
+|---|---|---|
+| **Gemini CLI** | Skills (`.gemini/skills/`) | Dossier avec un fichier prompt + config, invocable par `/nom_du_skill` |
+| **GitHub Copilot CLI** | Skills | Même logique — des commandes personnalisées enregistrées dans la config |
+| **Claude Code** | Slash commands (`.claude/commands/`) | Fichier markdown avec le prompt, invocable par `/nom_de_commande` |
+| **Cursor** | Custom commands | Prompts personnalisés accessibles depuis la palette de commandes |
+
+L'idée est toujours la même : capitaliser sur un bon prompt pour ne pas le réécrire. Quand vous trouvez une manière efficace de demander quelque chose à l'IA, transformez-la en skill.
+
+**Démo** : montrer comment créer un skill simple dans Gemini CLI — par exemple un skill `/flashcard-review` qui demande à l'IA d'analyser le code du projet en vérifiant la cohérence avec les règles métier des flashcards.
 
 ### Les agents de code IA — panorama
 
@@ -491,29 +455,6 @@ Quand on dit que Gemini CLI est un "agent", c'est parce qu'il ne fait pas que di
 
 C'est cette combinaison lecture + écriture + exécution qui fait la différence avec un simple chatbot.
 
-#### Le sandbox — sécurité d'exécution
-
-Quand l'IA exécute des commandes sur votre machine, ça pose une question évidente : est-ce que c'est sûr ?
-
-Gemini CLI intègre un **sandbox** (bac à sable) qui isole l'exécution des commandes. Concrètement : l'IA ne peut pas faire n'importe quoi sur votre machine — elle est limitée aux dossiers autorisés et aux commandes validées. Il y a un système de **trusted folders** (dossiers de confiance) : l'IA n'a les droits d'écriture que dans les dossiers que vous avez explicitement autorisés.
-
-En pratique, Gemini CLI demande confirmation avant d'exécuter des commandes potentiellement dangereuses. C'est un garde-fou important.
-
-> **Message pour les étudiants** : ne faites jamais aveuglément confiance à un agent qui exécute des commandes. Lisez ce qu'il propose de faire AVANT d'accepter.
-
-#### MCP — connecter des outils externes
-
-Le **MCP** (Model Context Protocol) est un standard ouvert qui permet de brancher des outils externes sur Gemini CLI (et sur d'autres agents comme Claude Code). C'est comme un système de plugins universel.
-
-**Exemples de ce qu'on peut connecter** :
-
-- Un serveur MCP pour accéder à une base de données → l'IA peut faire des requêtes SQL
-- Un serveur MCP pour GitHub → l'IA peut créer des issues, des PR, commenter du code
-- Un serveur MCP pour Figma → l'IA peut lire des maquettes de design
-- Un serveur MCP custom → n'importe quel outil interne de votre entreprise
-
-On ne fera pas de MCP dans ce cours (c'est avancé), mais c'est important de savoir que ça existe : ces outils sont conçus pour s'intégrer dans un workflow complet, pas pour rester isolés.
-
 ### Les agents et l'orchestration
 
 #### L'agent simple — le mode "agentic"
@@ -523,13 +464,13 @@ Au-delà des outils eux-mêmes, le mot "agent" désigne un enchaînement automat
 **Exemple concret** :
 
 ```
-Vous : "Ajoute une fonction heal_player qui restaure des PV
-        sans dépasser max_hp, avec un test."
+Vous : "Ajoute une fonction reset_card_level qui remet une carte
+        en révision (niveau 0), avec un test."
 
 L'IA enchaîne automatiquement :
 1. Lit le fichier functions.php pour voir le code existant
 2. Lit data.php pour comprendre la structure de données
-3. Écrit la fonction heal_player dans functions.php
+3. Écrit la fonction reset_card_level dans functions.php
 4. Crée un test
 5. Exécute le test avec php -r "..."
 6. Corrige si le test échoue
@@ -545,14 +486,14 @@ Gemini CLI va plus loin avec les **sub-agents** : des agents spécialisés qui t
 
 ```
 Agent principal (vous lui parlez) :
-  "Ajoute le système de magie au jeu"
+  "Ajoute le système de répétition espacée aux flashcards"
 
   → Délègue au sub-agent "analyste" :
       "Lis tout le code existant et fais-moi un résumé de l'architecture"
       ← Résultat : résumé de l'architecture
 
   → Délègue au sub-agent "développeur" :
-      "Voici l'architecture. Implémente les fonctions de magie."
+      "Voici l'architecture. Implémente les fonctions de répétition espacée."
       ← Résultat : nouveau code
 
   → Délègue au sub-agent "testeur" :
@@ -655,20 +596,6 @@ Imaginez que vous sautez d'un avion. L'IA, c'est quelqu'un qui vous a plié votr
 Les tests, c'est la vérification du parachute. On ne saute pas sans.
 
 Plus vous déléguez l'écriture du code à l'IA, plus vous avez besoin de tests pour vérifier le résultat. C'est contre-intuitif : on pourrait croire que l'IA rend les tests moins nécessaires. C'est l'inverse.
-
-#### En pratique dans ce cours
-
-Pour l'instant, vos "tests" ce sont les vérifications manuelles qu'on a vues :
-
-```bash
-php -r "require 'functions.php'; var_dump(ma_fonction(valeur_connue));"
-```
-
-C'est un bon début. Le réflexe à garder : **chaque fois que l'IA vous génère une fonction, testez-la avant de l'intégrer.** Pas demain. Pas à la fin. Tout de suite.
-
-Quand vous apprendrez les tests automatisés (PHPUnit, etc.), vous aurez le même réflexe — mais en mieux : les tests tourneront tout seuls, à chaque modification, et vous diront immédiatement si quelque chose est cassé.
-
-> **Ce qu'il faut retenir** : les tests ne sont pas un luxe ou un truc de senior. C'est le garde-fou qui vous empêche de livrer du code cassé — et avec l'IA qui génère du code à grande vitesse, ce garde-fou est plus important que jamais.
 
 ### Le message
 

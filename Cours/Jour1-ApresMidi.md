@@ -15,76 +15,12 @@ Chaque groupe montre :
 
 **Analyse guidée par l'intervenant**
 
-Pour chaque présentation, décortiquer en direct. Voici les patterns à chercher et à montrer :
+Pour chaque présentation, décortiquer en direct. Voici les patterns typiques à chercher — ils serviront de sujets de discussion avec les étudiants :
 
-#### Pattern 1 : Le code "trop sophistiqué"
-
-```php
-// L'IA a généré ça pour gérer les cartes
-$cardManager = new class {
-    use FlashcardTrait;
-    private array $cards = [];
-    public function __construct(
-        private readonly string $deckName,
-        private readonly StorageInterface $storage,
-    ) {
-        $this->loadFromStorage();
-    }
-    // ... 50 lignes de plus
-};
-```
-
-**Ce qu'on leur montre** : "Vous avez demandé un outil de flashcards simple. L'IA a généré de l'OOP avancée avec des traits, des interfaces, du readonly… Est-ce que quelqu'un peut m'expliquer ce que fait `StorageInterface` ? Non ? Alors ce code est dangereux — pas parce qu'il est mauvais, mais parce que vous ne le maîtrisez pas."
-
-#### Pattern 2 : L'hallucination silencieuse
-
-```php
-// L'IA utilise une fonction qui n'existe pas
-$cards = array_unique_by($cards, 'question');
-// array_unique_by n'existe pas en PHP natif !
-```
-
-**Ce qu'on leur montre** : "L'IA a inventé une fonction. Elle existe peut-être dans d'autres langages ou frameworks, pas en PHP natif. Le code a l'air propre, il n'y a pas de faute de syntaxe, mais ça plante à l'exécution. C'est une hallucination : l'IA est sûre d'elle, mais elle se trompe."
-
-#### Pattern 3 : La perte de cohérence
-
-```php
-// Prompt 1 : l'IA a créé les cartes comme ça
-$card = ['question' => '...', 'answer' => '...', 'deck' => 'PHP'];
-
-// Prompt 2 : l'IA a changé de structure sans prévenir
-$card = new Flashcard('...', '...', 'PHP', 0, 0, time(), true);
-```
-
-**Ce qu'on leur montre** : "D'un prompt à l'autre, l'IA a oublié la structure qu'elle avait utilisée. Elle n'a pas de mémoire persistante. Chaque prompt est un nouveau départ si on ne lui redonne pas le contexte. Et le pire : le fichier JSON sauvegardé avec l'ancien format ne sera plus lisible par le nouveau code."
-
-#### Pattern 4 : Le code verbeux qui noie le signal
-
-```php
-// 20 lignes pour faire quelque chose de simple
-function calculateScore($cards, $results) {
-    // Initialize the total score variable
-    $totalScore = 0;
-    // Initialize the total cards variable
-    $totalCards = count($cards);
-    // Loop through each result
-    foreach ($results as $result) {
-        // Check if the result is correct
-        if ($result['correct'] === true) {
-            // Increment the total score
-            $totalScore = $totalScore + 1;
-        }
-    }
-    // Calculate the percentage
-    $percentage = ($totalScore / $totalCards) * 100;
-    // Round the percentage to 2 decimal places
-    $percentage = round($percentage, 2);
-    // Return the final percentage
-    return $percentage;
-}
-```
-
-**Ce qu'on leur montre** : "Chaque ligne a un commentaire qui répète ce que fait le code. C'est du bruit. Un développeur expérimenté écrirait ça en 3 lignes. L'IA est verbeuse parce qu'elle a été entraînée sur des tutoriels — pas sur du code de production."
+- **Le code "trop sophistiqué"** — l'IA génère de l'OOP avancée (traits, interfaces, readonly…) pour un besoin simple
+- **L'hallucination silencieuse** — l'IA invente des fonctions qui n'existent pas en PHP natif
+- **La perte de cohérence** — la structure de données change d'un prompt à l'autre sans prévenir
+- **Le code verbeux** — des commentaires qui répètent le code, du bruit qui noie le signal
 
 ### Messages clés à faire passer
 
@@ -161,28 +97,7 @@ Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrèt
 - **Mélange de langages** : l'IA écrit du PHP avec une syntaxe JavaScript (ex: `const` au lieu de `define`, `let` au lieu de `$var`), surtout quand le contexte mélange plusieurs langages.
 - **Versions fantaisistes** : "Depuis PHP 8.3, vous pouvez utiliser X" — sauf que X n'existe dans aucune version de PHP.
 
-**Exercice rapide en live — l'IA qui répond faux avec assurance (5 min)** :
-
-Montrer plusieurs exemples en direct qui révèlent les failles du raisonnement par tokens :
-
-```
-Prompt : "Combien y a-t-il de R dans le mot 'strawberry' ?"
-```
-→ La plupart des LLM répondent 2 au lieu de 3. L'IA ne "lit" pas le mot lettre par lettre — elle prédit la réponse la plus probable.
-
-```
-Prompt : "Pourquoi y a-t-il deux L dans le mot 'holidays' ?"
-```
-→ Il n'y a qu'un seul L dans "holidays". Mais l'IA va souvent vous expliquer avec assurance pourquoi il y en a deux, en inventant une étymologie. Elle ne vérifie pas la prémisse de votre question.
-
-```
-Prompt : "Explique-moi la fonction php_compute_entropy() et donne un exemple d'utilisation en PHP."
-```
-→ Cette fonction n'existe absolument pas. Observer ensemble comment l'IA produit une explication détaillée, structurée, avec un exemple de code — tout est inventé mais tout a l'air parfaitement crédible.
-
-**Pourquoi ces exemples sont importants** : ils montrent que l'IA a deux failles fondamentales :
-1. **Elle ne vérifie pas les prémisses** — si vous affirmez quelque chose de faux dans votre prompt, elle le prend pour acquis et construit dessus.
-2. **Elle ne "voit" pas le texte lettre par lettre** — elle travaille par tokens, pas par caractères. Le comptage, l'orthographe exacte, l'analyse caractère par caractère ne sont pas son fort.
+**Exercice rapide en live** : il peut arriver que l'intervenant montre en direct des exemples qui révèlent les failles du raisonnement par tokens — comptage de lettres, prémisses fausses acceptées sans broncher, fonctions PHP inventées de toutes pièces. Le but est de montrer que l'IA ne vérifie ni les prémisses ni les faits, et qu'elle peut répondre faux avec une assurance totale.
 
 **Réflexe à acquérir** : face à toute fonction, classe ou feature que vous ne connaissez pas dans le code généré par l'IA, ouvrez php.net et vérifiez. C'est non négociable. Et ne posez jamais une question qui contient déjà la réponse ("c'est bien comme ça, non ?") — l'IA confirmera presque toujours.
 
@@ -514,7 +429,7 @@ Comprendre que le contexte est *la* variable clé qui détermine la qualité des
 
 L'IA ne connaît rien de votre projet. À chaque prompt, elle part de zéro (ou presque). Si vous ne lui donnez pas de contexte, elle *invente* le contexte.
 
-Ce matin, quand vous avez demandé "ajoute un système de combat" sans préciser :
+Ce matin, quand vous avez demandé "ajoute un système de répétition espacée" sans préciser :
 - La structure de données existante
 - Le langage et sa version
 - Les conventions du projet

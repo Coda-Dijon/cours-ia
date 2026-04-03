@@ -7,6 +7,14 @@
 require_once 'functions.php';
 require_once 'data.php';
 
+// Ce script nécessite un terminal interactif (mode CLI)
+if (php_sapi_name() !== 'cli') {
+    echo "<h1>⚠️ Ce script doit être exécuté en ligne de commande</h1>";
+    echo "<p>Ouvrez un terminal et lancez :</p>";
+    echo "<pre>docker exec -it php-cours-ia php /var/www/projet/flashcards.php</pre>";
+    exit(0);
+}
+
 // --- Initialisation ---
 $cards = load_cards();
 
