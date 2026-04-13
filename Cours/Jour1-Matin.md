@@ -182,23 +182,23 @@ Comment on passe d'un programme vide à un assistant capable de coder ?
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║  ÉTAPE 1 : PRÉ-ENTRAÎNEMENT                                  ║
+║  ÉTAPE 1 : PRÉ-ENTRAÎNEMENT                                   ║
 ║                                                               ║
 ║  Données : des milliards de pages web, livres, code source    ║
 ║  Objectif : apprendre les "règles" du langage                 ║
 ║  Méthode : on cache un mot, le modèle doit le deviner         ║
 ║                                                               ║
-║  "Le chat dort sur le ___"  → "canapé", "lit", "tapis"       ║
+║  "Le chat dort sur le ___"  → "canapé", "lit", "tapis"        ║
 ║                                                               ║
 ║  Résultat : un modèle qui sait compléter du texte,            ║
-║  mais qui n'est pas encore "utile" comme assistant             ║
-║  Coût : des millions de dollars en GPU                         ║
+║  mais qui n'est pas encore "utile" comme assistant            ║
+║  Coût : des millions de dollars en GPU                        ║
 ╚═══════════════════════════════════════════════════════════════╝
                           ↓
 ╔═══════════════════════════════════════════════════════════════╗
 ║  ÉTAPE 2 : FINE-TUNING SUPERVISÉ                              ║
 ║                                                               ║
-║  Des humains écrivent des exemples de conversations :          ║
+║  Des humains écrivent des exemples de conversations :         ║
 ║  Q: "Comment trier un tableau en PHP ?"                       ║
 ║  R: "Utilisez sort() pour un tri croissant..."                ║
 ║                                                               ║
@@ -206,7 +206,8 @@ Comment on passe d'un programme vide à un assistant capable de coder ?
 ╚═══════════════════════════════════════════════════════════════╝
                           ↓
 ╔═══════════════════════════════════════════════════════════════╗
-║  ÉTAPE 3 : RLHF (apprentissage par feedback humain)           ║
+║  ÉTAPE 3 : - RLHF (apprentissage par feedback humain)         ║
+║  Reinforcement learning from human feedback                   ║
 ║                                                               ║
 ║  Le modèle génère plusieurs réponses                          ║
 ║  Des humains classent : A > B > C                             ║
@@ -261,7 +262,8 @@ Un token est un morceau de texte — parfois un mot entier, parfois un bout de m
 
 **Pourquoi c'est crucial** :
 
-Chaque LLM a une **fenêtre de contexte** — un nombre maximum de tokens qu'il peut traiter en une seule conversation. C'est comme la mémoire de travail du modèle.
+Chaque LLM a une **fenêtre de contexte** — un nombre maximum de tokens qu'il peut traiter en une seule conversation. 
+C'est comme la `mémoire de travail` du modèle.
 
 ```
 Modèle                  Fenêtre de contexte     ≈ Équivalent texte
@@ -363,7 +365,7 @@ Quand quelqu'un dit "l'IA comprend", "l'IA réfléchit", "l'IA est intelligente"
 
 C'est comme dire que votre calculatrice "comprend" les maths quand elle affiche `2 + 2 = 4`. Elle ne comprend rien — elle applique des règles. Un LLM fait pareil, mais avec des règles apprises statistiquement sur des milliards de textes, plutôt que programmées à la main.
 
-**L'IA, c'est uniquement de la statistique.**
+> **L'IA, c'est uniquement de la statistique.**
 
 C'est le message le plus important de cette partie du cours. Tout ce qu'on a vu — les tokens, les embeddings, l'entraînement — peut se résumer en une phrase :
 

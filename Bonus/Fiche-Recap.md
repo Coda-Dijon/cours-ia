@@ -9,13 +9,13 @@
 ```
                      Tu comprends le sujet
                      OUI                    NON
-                 ┌──────────────────┬──────────────────┐
-  Tâche          │  IA = accélérateur│  IA = béquille    │
-  répétitive     │  FONCEZ           │  DANGEREUX        │
-                 ├──────────────────┼──────────────────┤
-  Tâche          │  IA = sparring    │  IA = poison      │
-  d'apprentissage│  UTILE avec recul │  ÉVITEZ           │
-                 └──────────────────┴──────────────────┘
+                 ┌───────────────────┬─────────────────┐
+  Tâche          │  IA = accélérateur│  IA = béquille  │
+  répétitive     │  FONCEZ           │  DANGEREUX      │
+                 ├───────────────────┼─────────────────┤
+  Tâche          │  IA = sparring    │  IA = poison    │
+  d'apprentissage│  UTILE avec recul │  ÉVITEZ         │
+                 └───────────────────┴─────────────────┘
 ```
 
 **Utilise l'IA pour** : explorer un problème, générer du boilerplate, tester des approches, documenter, relire du code.
@@ -80,14 +80,14 @@ Code concerné : [coller la fonction]
 
 ## Les pièges de l'IA à connaître
 
-| Piège | Ce qui se passe | Comment s'en protéger |
-|-------|----------------|----------------------|
-| **Hallucination** | L'IA invente des fonctions, des packages, des docs | Vérifier sur la doc officielle |
-| **Biais de confirmation** | L'IA dit "oui tout à fait" même quand c'est faux | Ne pas poser de questions orientées |
-| **Over-engineering** | L'IA génère de l'OOP avancée pour un besoin simple | Préciser le niveau dans les rules |
-| **Perte de cohérence** | L'IA change de structure d'un prompt à l'autre | Donner le contexte à chaque prompt |
-| **Code de tutoriel** | L'IA reproduit des patterns datés ou simplistes | Comparer avec les bonnes pratiques actuelles |
-| **Failles de sécurité** | Requêtes SQL sans protection, pas de validation | Demander "ce code est-il vulnérable ?" |
+| Piège                     | Ce qui se passe                                    | Comment s'en protéger                        |
+|---------------------------|----------------------------------------------------|----------------------------------------------|
+| **Hallucination**         | L'IA invente des fonctions, des packages, des docs | Vérifier sur la doc officielle               |
+| **Biais de confirmation** | L'IA dit "oui tout à fait" même quand c'est faux   | Ne pas poser de questions orientées          |
+| **Over-engineering**      | L'IA génère de l'OOP avancée pour un besoin simple | Préciser le niveau dans les rules            |
+| **Perte de cohérence**    | L'IA change de structure d'un prompt à l'autre     | Donner le contexte à chaque prompt           |
+| **Code de tutoriel**      | L'IA reproduit des patterns datés ou simplistes    | Comparer avec les bonnes pratiques actuelles |
+| **Failles de sécurité**   | Requêtes SQL sans protection, pas de validation    | Demander "ce code est-il vulnérable ?"       |
 
 ---
 
