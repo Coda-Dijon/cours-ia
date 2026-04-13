@@ -5,7 +5,7 @@
 ---
 
 <a id="j1-intro"></a>
-## 9h – 9h30 : Introduction
+## 9h30 – 10h00 : Introduction
 
 ### Objectif pédagogique
 Poser le cadre, créer un climat de confiance, évaluer le niveau de la classe vis-à-vis de l'IA.
@@ -41,7 +41,7 @@ Expliquer clairement l'approche :
 ---
 
 <a id="j1-fonctionnement"></a>
-## 9h30 – 10h15 : Comment ça fonctionne
+## 10h00 – 10h45 : Comment ça fonctionne
 
 ### Objectif pédagogique
 Donner une compréhension intuitive puis progressivement technique du fonctionnement des LLM. On part de ce que les étudiants connaissent déjà (ChatGPT, Netflix, FaceID...), on montre le paysage complet, puis on plonge dans la mécanique. Ils doivent repartir en sachant *pourquoi* l'IA se comporte comme elle le fait, pourquoi elle se trompe, et pourquoi le contexte est si important.
@@ -482,7 +482,7 @@ Montrer le résultat. Faire remarquer :
 ---
 
 <a id="j1-exercice1"></a>
-## 10h45 – 12h : Exercice 1 — Le run "naïf"
+## 11h00 – 12h : Exercice 1 — Le run "naïf"
 
 ### Objectif pédagogique
 Faire vivre aux étudiants l'expérience d'utiliser l'IA sans méthode pour qu'ils constatent eux-mêmes les limites. C'est l'expérience fondatrice du cours.
@@ -541,6 +541,6 @@ Le programme fourni est fonctionnel mais très basique : on peut ajouter des car
 
 ---
 
-*Pause déjeuner 12h – 13h*
+*Pause déjeuner 12h – 13h30*
 
 ---

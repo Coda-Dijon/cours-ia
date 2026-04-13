@@ -1,5 +1,5 @@
 <a id="j1-analyse"></a>
-## 13h – 13h45 : Analyse collective
+## 13h30 – 14h15 : Analyse collective
 
 ### Objectif pédagogique
 Apprendre à lire et critiquer du code généré par IA. Développer le réflexe de ne pas accepter aveuglément ce que l'IA produit.
@@ -76,7 +76,7 @@ Si le code IA ne ressemble pas au code existant, il va créer de la dette techni
 ---
 
 <a id="j1-limites"></a>
-## 13h45 – 14h15 : Les limites et les enjeux éthiques de l'IA
+## 14h15 - 14h45 : Les limites et les enjeux éthiques de l'IA
 
 ### Objectif pédagogique
 Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrètement. Transformer la frustration du matin en compréhension. Ouvrir la réflexion au-delà de la technique pure : biais, éthique, propriété intellectuelle, impact environnemental, responsabilité.
@@ -290,12 +290,12 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 
 ---
 
-*Pause 14h15 – 14h30*
+*Pause 14h45 – 15h00*
 
 ---
 
 <a id="j1-quand-pas"></a>
-## 14h30 – 14h50 : Quand ne PAS utiliser l'IA
+## 15h00 – 15h20 : Quand ne PAS utiliser l'IA
 
 ### Objectif pédagogique
 Identifier les situations concrètes où l'IA est contre-productive, notamment pour l'apprentissage. Donner des critères de décision clairs.
@@ -370,7 +370,7 @@ Questions pour lancer le débat :
 ---
 
 <a id="j1-metier"></a>
-## 14h50 – 15h20 : Le métier qui change
+## 15h20 – 15h50 : Le métier qui change
 
 ### Objectif pédagogique
 Donner une vision réaliste de l'impact de l'IA sur le métier de développeur, ni alarmiste ni naïve.
@@ -420,7 +420,7 @@ Laisser les étudiants réagir. Questions possibles :
 ---
 
 <a id="j1-contexte"></a>
-## 15h20 – 15h50 : La notion de contexte
+## 15h50 – 16h20 : La notion de contexte
 
 ### Objectif pédagogique
 Comprendre que le contexte est *la* variable clé qui détermine la qualité des réponses de l'IA. C'est le concept pivot qui relie le jour 1 au jour 2.
@@ -492,7 +492,7 @@ Demander à chaque groupe de réécrire un des prompts de ce matin en ajoutant d
 ---
 
 <a id="j1-debrief"></a>
-## 15h50 – 16h : Débrief jour 1
+## 16h20 – Fin : Débrief jour 1
 
 ### Message à faire passer
 
