@@ -376,6 +376,8 @@ Si vous ne savez pas ce que vous voulez, l'IA ne peut pas deviner. Elle va produ
 
 Renommer une variable dans 3 fichiers, ajouter un commentaire, corriger une typo… Certaines tâches prennent 30 secondes à faire et 2 minutes à expliquer à l'IA. Ne perdez pas votre temps à prompter pour chaque micro-tâche.
 
+> Démo refactoring - Yoan
+
 ### Discussion ouverte (10 min)
 
 Questions pour lancer le débat :
