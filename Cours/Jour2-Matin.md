@@ -6,7 +6,7 @@
 ---
 
 <a id="j2-iteratif"></a>
-## 9h – 9h30 : Le prompt itératif vs le one-shot
+## 9h30 – 10h00 : Le prompt itératif vs le one-shot
 
 ### Objectif pédagogique
 Comprendre qu'un bon prompt est une *conversation*, pas une commande unique.
@@ -85,7 +85,7 @@ Voici le code actuel de la fonction :
 ---
 
 <a id="j2-specifier"></a>
-## 9h30 – 10h : Spécifier avant de développer
+## 10h00 – 10h30 : Spécifier avant de développer
 
 ### Objectif pédagogique
 Adopter un workflow professionnel en 3 phases : spécification métier → plan d'implémentation → implémentation par phases avec tests.
@@ -225,12 +225,12 @@ Montrer le résultat vs ce que le one-shot du jour 1 aurait donné.
 
 ---
 
-*Pause 10h – 10h15*
+*Pause 10h30 – 10h45*
 
 ---
 
 <a id="j2-sessions"></a>
-## 10h15 – 10h45 : Sessions d'échange avec l'IA
+## 10h45 – 11h00 : Sessions d'échange avec l'IA
 
 ### Objectif pédagogique
 Apprendre à utiliser l'IA comme partenaire de réflexion *avant* de coder, pas seulement comme générateur de code.
@@ -301,7 +301,7 @@ On fera un exercice de session d'échange ensemble en cours — pas besoin de le
 ---
 
 <a id="j2-rules"></a>
-## 10h45 – 11h15 : Rules, outils et agents — tour d'horizon complet
+## 11h00 – 11h30 : Rules, outils et agents — tour d'horizon complet
 
 ### Objectif pédagogique
 Comprendre les mécanismes qui permettent de donner un contexte *persistant* à l'IA, connaître le panorama des outils disponibles, et découvrir les concepts d'agents et d'orchestration.
