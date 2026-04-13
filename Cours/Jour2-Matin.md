@@ -149,6 +149,8 @@ Le réflexe professionnel, c'est l'inverse : on réfléchit d'abord, on code ens
 ╚═════════════════════════════════════════════════════════════════╝
 ```
 
+[Spec-Driven Development](https://github.com/github/spec-kit)
+
 ### Pourquoi ce workflow change tout
 
 **Phase 1 (spec métier)** : on clarifie ce qu'on veut *avant* de penser au code. L'IA est excellente pour aider à explorer un besoin, poser les bonnes questions, identifier les cas limites qu'on aurait oubliés.

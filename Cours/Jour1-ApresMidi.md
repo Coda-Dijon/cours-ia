@@ -116,6 +116,8 @@ L'IA n'est pas neutre. Elle est le reflet statistique de ses données d'entraîn
 
 #### Biais de confirmation — le "yes-man"
 
+![Biais de confirmation](img/biais-confirmation.webp)
+
 C'est peut-être le biais le plus insidieux. L'IA a été entraînée pour être *serviable* et *agréable* (via le RLHF, qu'on a vu ce matin). Résultat : elle a tendance à valider ce que vous dites, même quand c'est faux.
 
 ```
@@ -129,6 +131,8 @@ C'est **faux**. En PHP, les tableaux sont passés **par copie** par défaut (cop
 **Leçon** : ne posez jamais de questions orientées à l'IA. Au lieu de "C'est bien comme ça qu'on fait ?", demandez "Quelles sont les différentes façons de faire X ? Quels sont les avantages et inconvénients de chaque approche ?"
 
 #### Biais sociétaux (ceux qui dépassent le code)
+
+![Biais de genre](img/biais-genre.webp)
 
 Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils apparaissent dans les données :
 
@@ -185,6 +189,8 @@ Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tou
 
 Les LLM consomment énormément d'énergie. C'est un sujet que peu de développeurs abordent, mais qui est important.
 
+![Impact sur l'environnement](img/ia-impact-environnement.webp)
+
 **Quelques ordres de grandeur** :
 
 - L'entraînement de GPT-4 a consommé environ l'équivalent de la consommation annuelle de plusieurs centaines de foyers.
@@ -196,6 +202,17 @@ Les LLM consomment énormément d'énergie. C'est un sujet que peu de développe
 - Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
 - Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
 - L'efficacité de vos prompts n'est pas seulement une question de productivité, c'est aussi une question de responsabilité.
+
+[Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)
+
+> Démo ecologits
+[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/
+
+> [ACV Mistral](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai)
+
+![ACV Mistral](img/acv-mistral.webp)
+
+![Mistral usage](img/mistral-usage.webp)
 
 #### d) Responsabilité — qui est responsable du bug ?
 
