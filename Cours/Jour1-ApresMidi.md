@@ -1,5 +1,5 @@
 <a id="j1-analyse"></a>
-## 13h – 13h45 : Analyse collective
+## 13h30 – 14h15 : Analyse collective
 
 ### Objectif pédagogique
 Apprendre à lire et critiquer du code généré par IA. Développer le réflexe de ne pas accepter aveuglément ce que l'IA produit.
@@ -76,7 +76,7 @@ Si le code IA ne ressemble pas au code existant, il va créer de la dette techni
 ---
 
 <a id="j1-limites"></a>
-## 13h45 – 14h15 : Les limites et les enjeux éthiques de l'IA
+## 14h15 - 14h45 : Les limites et les enjeux éthiques de l'IA
 
 ### Objectif pédagogique
 Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrètement. Transformer la frustration du matin en compréhension. Ouvrir la réflexion au-delà de la technique pure : biais, éthique, propriété intellectuelle, impact environnemental, responsabilité.
@@ -116,6 +116,8 @@ L'IA n'est pas neutre. Elle est le reflet statistique de ses données d'entraîn
 
 #### Biais de confirmation — le "yes-man"
 
+![Biais de confirmation](img/biais-confirmation.webp)
+
 C'est peut-être le biais le plus insidieux. L'IA a été entraînée pour être *serviable* et *agréable* (via le RLHF, qu'on a vu ce matin). Résultat : elle a tendance à valider ce que vous dites, même quand c'est faux.
 
 ```
@@ -129,6 +131,8 @@ C'est **faux**. En PHP, les tableaux sont passés **par copie** par défaut (cop
 **Leçon** : ne posez jamais de questions orientées à l'IA. Au lieu de "C'est bien comme ça qu'on fait ?", demandez "Quelles sont les différentes façons de faire X ? Quels sont les avantages et inconvénients de chaque approche ?"
 
 #### Biais sociétaux (ceux qui dépassent le code)
+
+![Biais de genre](img/biais-genre.webp)
 
 Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils apparaissent dans les données :
 
@@ -185,6 +189,8 @@ Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tou
 
 Les LLM consomment énormément d'énergie. C'est un sujet que peu de développeurs abordent, mais qui est important.
 
+![Impact sur l'environnement](img/ia-impact-environnement.webp)
+
 **Quelques ordres de grandeur** :
 
 - L'entraînement de GPT-4 a consommé environ l'équivalent de la consommation annuelle de plusieurs centaines de foyers.
@@ -196,6 +202,17 @@ Les LLM consomment énormément d'énergie. C'est un sujet que peu de développe
 - Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
 - Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
 - L'efficacité de vos prompts n'est pas seulement une question de productivité, c'est aussi une question de responsabilité.
+
+[Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)
+
+> Démo ecologits
+[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/
+
+> [ACV Mistral](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai)
+
+![ACV Mistral](img/acv-mistral.webp)
+
+![Mistral usage](img/mistral-usage.webp)
 
 #### d) Responsabilité — qui est responsable du bug ?
 
@@ -290,12 +307,12 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 
 ---
 
-*Pause 14h15 – 14h30*
+*Pause 14h45 – 15h00*
 
 ---
 
 <a id="j1-quand-pas"></a>
-## 14h30 – 14h50 : Quand ne PAS utiliser l'IA
+## 15h00 – 15h20 : Quand ne PAS utiliser l'IA
 
 ### Objectif pédagogique
 Identifier les situations concrètes où l'IA est contre-productive, notamment pour l'apprentissage. Donner des critères de décision clairs.
@@ -359,6 +376,8 @@ Si vous ne savez pas ce que vous voulez, l'IA ne peut pas deviner. Elle va produ
 
 Renommer une variable dans 3 fichiers, ajouter un commentaire, corriger une typo… Certaines tâches prennent 30 secondes à faire et 2 minutes à expliquer à l'IA. Ne perdez pas votre temps à prompter pour chaque micro-tâche.
 
+> Démo refactoring - Yoan
+
 ### Discussion ouverte (10 min)
 
 Questions pour lancer le débat :
@@ -370,7 +389,7 @@ Questions pour lancer le débat :
 ---
 
 <a id="j1-metier"></a>
-## 14h50 – 15h20 : Le métier qui change
+## 15h20 – 15h50 : Le métier qui change
 
 ### Objectif pédagogique
 Donner une vision réaliste de l'impact de l'IA sur le métier de développeur, ni alarmiste ni naïve.
@@ -420,7 +439,7 @@ Laisser les étudiants réagir. Questions possibles :
 ---
 
 <a id="j1-contexte"></a>
-## 15h20 – 15h50 : La notion de contexte
+## 15h50 – 16h20 : La notion de contexte
 
 ### Objectif pédagogique
 Comprendre que le contexte est *la* variable clé qui détermine la qualité des réponses de l'IA. C'est le concept pivot qui relie le jour 1 au jour 2.
@@ -492,7 +511,7 @@ Demander à chaque groupe de réécrire un des prompts de ce matin en ajoutant d
 ---
 
 <a id="j1-debrief"></a>
-## 15h50 – 16h : Débrief jour 1
+## 16h20 – Fin : Débrief jour 1
 
 ### Message à faire passer
 

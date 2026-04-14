@@ -1,5 +1,5 @@
 <a id="j2-exercice2"></a>
-## 13h – 14h15 : Exercice 2 — Le run "structuré"
+## 13h30 – 14h45 : Exercice 2 — Le run "structuré"
 
 ### Mise en place
 
@@ -44,7 +44,7 @@ Chaque groupe a maintenant :
 ---
 
 <a id="j2-symfony"></a>
-## 14h30 – 15h30 : Atelier — Explorer une codebase Symfony avec l'IA
+## 14h45 – 15h45 : Atelier — Explorer une codebase Symfony avec l'IA
 
 ### Objectif pédagogique
 Apprendre à utiliser l'IA pour **comprendre rapidement un projet existant qu'on découvre**, puis y **détecter des axes d'amélioration**. C'est exactement la situation d'un développeur qui arrive sur un projet en entreprise : une codebase inconnue, des milliers de lignes, et il faut être opérationnel vite.
@@ -133,7 +133,7 @@ Tour rapide : chaque groupe explique **son composant** aux autres en 1 minute. L
 ---
 
 <a id="j2-appliquer"></a>
-## 15h30 – 15h50 : Appliquer la méthodologie — Temps libre encadré
+## 15h45 – 16h05 : Appliquer la méthodologie — Temps libre encadré
 
 ### Objectif pédagogique
 Laisser les étudiants appliquer librement les outils et la méthodologie sur un sujet de leur choix, pour ancrer les réflexes.
@@ -154,7 +154,7 @@ Laisser les étudiants appliquer librement les outils et la méthodologie sur un
 ---
 
 <a id="j2-debrief"></a>
-## 15h50 – 16h : Débrief final
+## 16h05 – Fin : Débrief final
 
 ### La règle à retenir
 
