@@ -439,7 +439,7 @@ Laisser les étudiants réagir. Questions possibles :
 ---
 
 <a id="j1-contexte"></a>
-## 15h50 – 16h20 : La notion de contexte
+## 15h50 – 16h30 : La notion de contexte
 
 ### Objectif pédagogique
 Comprendre que le contexte est *la* variable clé qui détermine la qualité des réponses de l'IA. C'est le concept pivot qui relie le jour 1 au jour 2.
@@ -502,27 +502,71 @@ Un bon contexte =
   + Le format attendu (style de code, langue des commentaires)
 ```
 
-### Exercice express (5 min)
+### Mini-exercice comparatif (15 min)
 
-Demander à chaque groupe de réécrire un des prompts de ce matin en ajoutant du contexte. Comparer oralement les résultats.
+Pour que la différence soit *vécue* et pas juste expliquée, on fait l'exercice en direct.
+
+**Consigne (à faire en binôme, 10 min)** :
+
+> "Reprenez un des prompts que vous avez utilisés ce matin — celui dont vous êtes le moins fier. Réécrivez-le en deux versions :
+> - **Version A** : le prompt d'origine, tel quel.
+> - **Version B** : le même prompt, mais avec les 5 composants du contexte ci-dessus.
+>
+> Lancez les deux versions dans Gemini CLI, l'une après l'autre (session propre entre les deux). Observez les différences : longueur du résultat, cohérence avec votre projet, qualité du code."
+
+**Mise en commun (5 min)** : deux ou trois groupes présentent leur comparaison à l'oral. On note au tableau les différences les plus marquantes : est-ce que l'IA a inventé moins de choses ? Est-ce que le code colle mieux au projet ? Est-ce qu'il est plus court / plus long ? Pourquoi ?
+
+L'objectif n'est pas d'écrire le "prompt parfait" — c'est que les étudiants *sentent* dans leur chair que deux prompts qui disent la même chose donnent des résultats radicalement différents selon le contexte fourni.
 
 > **Transition** : "Vous voyez la différence ? Et encore, là on fait ça à la main, prompt par prompt. Demain, on va voir comment *automatiser* ce contexte avec des rules, des specs, et un vrai workflow."
 
 ---
 
 <a id="j1-debrief"></a>
-## 16h20 – Fin : Débrief jour 1
+## 16h30 – 17h : Débrief jour 1
 
-### Message à faire passer
+### Format — 30 minutes, on prend le temps
 
-**Le constat du jour 1** : sans méthode, l'IA produit du code moyen qu'on ne maîtrise pas. C'est pire que pas d'IA du tout, parce que ça donne une *illusion* de productivité.
+Cette demi-heure n'est pas un simple récap par l'intervenant. C'est un moment posé où les étudiants prennent du recul sur ce qu'ils ont vécu, verbalisent leurs surprises et leurs inquiétudes, et se projettent dans le Jour 2. Les trois temps :
 
-**Ce qu'on a appris** :
-1. Comment fonctionne un LLM (et pourquoi il se trompe)
-2. L'IA hallucine, confirme vos erreurs, et ne dit jamais "je ne sais pas"
-3. Sans contexte, l'IA invente — avec contexte, elle assiste
-4. Le métier change, mais les fondamentaux restent
+1. **Récap guidé** (8 min)
+2. **Tour de table** (15 min)
+3. **Teaser Jour 2** (7 min)
 
-**Teaser jour 2** : "Demain, on reprend le même projet. Mais cette fois, avec une méthode. Rules, specs, prompts itératifs, contexte structuré. Vous allez voir la différence."
+### 1. Récap guidé (8 min)
+
+Reprendre au tableau les grands moments de la journée, en ordre chronologique, et laisser les étudiants compléter à l'oral.
+
+- Le matin : comment fonctionne un LLM. Prédiction statistique, tokens, contexte, auto-régressif. L'IA n'est pas un cerveau — c'est une machine à probabilités.
+- L'exercice 1 : le run naïf. Ce qu'ils ont ressenti, ce qui a foiré, ce qui les a surpris dans le code produit.
+- L'après-midi : les patterns d'échec, les hallucinations, les biais, les limites éthiques, quand NE PAS utiliser l'IA, comment le métier change.
+- La notion de contexte : le concept pivot. Sans contexte, l'IA invente.
+
+**Les 4 grands messages de la journée** (à réénoncer clairement) :
+
+1. Comment fonctionne un LLM — et pourquoi il se trompe sans qu'on s'en aperçoive.
+2. L'IA hallucine, confirme vos erreurs, et ne dit jamais "je ne sais pas".
+3. Sans contexte, l'IA invente — avec contexte, elle assiste.
+4. Le métier change, mais les fondamentaux restent : lire, comprendre, vérifier.
+
+### 2. Tour de table (15 min)
+
+Chaque étudiant prend la parole à tour de rôle. Format court : 1 minute par personne, l'intervenant distribue la parole et relance si besoin. Trois questions au choix (ils peuvent en traiter une, deux, ou les trois) :
+
+- **Ce qui m'a le plus surpris aujourd'hui** — un moment précis dans la journée où ils se sont dit "ah, je n'avais pas vu ça comme ça".
+- **Ce qui m'inquiète** — un doute, une peur, un truc qui leur est resté en travers après cette journée. C'est normal d'être secoué par ce genre de contenu, il faut que ça puisse sortir.
+- **Ce que je vais changer dans ma façon d'utiliser l'IA dès demain soir, chez moi** — l'intention concrète.
+
+**Rôle de l'intervenant** : écouter, noter au tableau les thèmes récurrents, pas juger. Si un étudiant dit quelque chose de faux ou de clairement déformé, reformuler doucement sans le reprendre frontalement. L'objectif est d'ouvrir la parole, pas de corriger.
+
+### 3. Teaser Jour 2 (7 min)
+
+> "Ce matin vous êtes arrivés avec une idée de l'IA. Aujourd'hui on l'a secouée. Demain, on va vous donner les outils pour *vraiment* travailler avec. Pas en chatbot, pas en stackoverflow++. En vrai outil de travail.
+>
+> Demain : on reprend le même projet. Les mêmes flashcards. Mais cette fois, avec une méthode. Vous allez écrire des **rules** — une sorte de mémoire persistante pour l'IA. Vous allez écrire des **specs** — on spécifie avant de coder. Vous allez faire des **prompts itératifs** — une conversation, pas une commande. Et vous allez découvrir ce qu'est un **agent** au sens technique du terme, et pourquoi c'est en train de changer le métier.
+>
+> Vous allez revoir votre code d'aujourd'hui avec de nouveaux yeux. Et vous allez livrer quelque chose dont vous êtes vraiment fiers."
+
+**Consignes pratiques pour demain** (30 secondes) : horaires, ce qu'il faut apporter, la config à vérifier si nécessaire.
 
 ---

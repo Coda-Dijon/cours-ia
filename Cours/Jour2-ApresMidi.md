@@ -39,12 +39,71 @@ Chaque groupe a maintenant :
 
 ---
 
-*Pause 14h15 – 14h30*
+*Pause 14h45 – 15h00*
+
+---
+
+<a id="j2-workflow"></a>
+## 15h00 – 15h30 : Ton workflow réel
+
+### Objectif pédagogique
+Les étudiants viennent de vivre le run "structuré". C'est le moment parfait pour leur montrer à quoi ressemble ce même workflow **chez un praticien expérimenté, sur de vrais projets client**. On relie ce qu'ils viennent de faire (rules + spec + itératif sur un petit projet) à ce qu'ils feront en stage ou en job (rules + spec + itératif sur une vraie codebase métier).
+
+### Démo courte — Projet client (10 min)
+
+Montrer (en floutant les infos confidentielles si nécessaire) :
+
+1. **Le fichier de rules** d'un vrai projet — montrer la richesse du contexte donné à l'IA : stack, conventions, patterns, anti-patterns, règles métier.
+2. **Une session de spec** — comment une discussion avec l'IA aboutit à un document technique clair qu'on peut relire à froid.
+3. **Un prompt de développement** — avec le contexte, les rules, la spec → le code produit.
+
+L'idée est qu'ils voient que ce qu'ils ont fait ce matin à petite échelle, c'est **exactement** ce qui se fait en pro — juste avec plus de volume et des enjeux plus lourds.
+
+### Ce que j'automatise au quotidien — 3 exemples (10 min)
+
+**Exemple 1 : Génération de CRUD**
+> "Quand j'ai une nouvelle entité à créer (ex : un système de facturation), l'IA me génère le squelette complet en suivant mes rules : migration, modèle, contrôleur, routes, validation. Je passe de 2h à 15 min — mais je relis tout."
+
+**Exemple 2 : Revue de code**
+> "Avant de committer, je fais relire mon diff par l'IA. Elle détecte les incohérences, les oublis de validation, les failles de sécurité basiques. Ça ne remplace pas une vraie revue humaine, mais ça attrape 80% des erreurs bêtes."
+
+**Exemple 3 : Rédaction de tests**
+> "J'écris la fonction, je demande à l'IA de générer les tests unitaires. Elle couvre souvent des cas limites auxquels je n'aurais pas pensé. Je vérifie et j'ajuste, mais ça me fait gagner un temps considérable."
+
+### Les tests : le vrai garde-fou (10 min)
+
+Vous n'avez pas encore appris à écrire des tests automatisés — et ce n'est pas le sujet du cours. Mais il faut comprendre dès maintenant **pourquoi les tests deviennent encore plus importants** quand on utilise l'IA pour coder.
+
+#### Le problème fondamental
+
+Quand vous écrivez du code vous-même, ligne par ligne, vous comprenez chaque décision. Si un bug arrive, vous avez une intuition de où chercher parce que vous avez construit le raisonnement.
+
+Quand l'IA écrit du code pour vous, vous recevez un bloc de 50 lignes d'un coup. Même si vous le relisez, vous n'avez pas le même niveau de compréhension que si vous l'aviez écrit. Et c'est là que les bugs se cachent — dans les détails que vous n'avez pas questionnés.
+
+**Sans tests, comment savoir que le code fait ce qu'il prétend faire ?** On ne le sait pas. On fait confiance. Et la confiance, en développement, c'est le meilleur moyen de livrer des bugs.
+
+#### Pourquoi c'est crucial avec l'IA
+
+L'IA fait trois choses qui rendent les tests indispensables :
+
+1. **Elle modifie du code existant sans le vouloir.** Une régression passe inaperçue jusqu'à ce qu'un utilisateur tombe dessus.
+2. **Elle gère mal les cas limites.** Code qui marche sur le cas "normal" et qui plante sur les cas rares (liste vide, nombre négatif, fichier manquant).
+3. **Elle vous donne confiance à tort.** "A l'air de marcher" ≠ "marche". Les tests transforment une impression en certitude.
+
+#### L'analogie du parachute
+
+L'IA, c'est quelqu'un qui vous a plié votre parachute. Il a l'air compétent, il vous dit que c'est bon. Mais est-ce que vous sautez sans vérifier ? Les tests, c'est la vérification du parachute. On ne saute pas sans.
+
+Plus vous déléguez l'écriture du code à l'IA, plus vous avez besoin de tests pour vérifier le résultat. C'est contre-intuitif : on pourrait croire que l'IA rend les tests moins nécessaires. C'est l'inverse.
+
+### Le message final de la section
+
+L'IA est un multiplicateur, pas un remplaçant. Plus vous êtes compétent, plus l'IA vous est utile. Moins vous êtes compétent, plus elle est dangereuse. Et les tests sont ce qui vous permet de faire confiance au code — qu'il soit écrit par vous, par un collègue, ou par une IA.
 
 ---
 
 <a id="j2-symfony"></a>
-## 14h45 – 15h45 : Atelier — Explorer une codebase Symfony avec l'IA
+## 15h30 – 16h30 : Atelier — Explorer une codebase Symfony avec l'IA
 
 ### Objectif pédagogique
 Apprendre à utiliser l'IA pour **comprendre rapidement un projet existant qu'on découvre**, puis y **détecter des axes d'amélioration**. C'est exactement la situation d'un développeur qui arrive sur un projet en entreprise : une codebase inconnue, des milliers de lignes, et il faut être opérationnel vite.
@@ -133,14 +192,14 @@ Tour rapide : chaque groupe explique **son composant** aux autres en 1 minute. L
 ---
 
 <a id="j2-appliquer"></a>
-## 15h45 – 16h05 : Appliquer la méthodologie — Temps libre encadré
+## 16h30 – 16h45 : Appliquer la méthodologie — Temps libre encadré
 
 ### Objectif pédagogique
 Laisser les étudiants appliquer librement les outils et la méthodologie sur un sujet de leur choix, pour ancrer les réflexes.
 
 ### Consigne
 
-> "Vous avez 20 minutes. Choisissez un des défis ci-dessous et appliquez la méthodologie complète : rules, spec, itératif. C'est du temps pour VOUS — expérimentez."
+> "Vous avez 15 minutes. Choisissez un des défis ci-dessous et appliquez la méthodologie complète : rules, spec, itératif. C'est du temps pour VOUS — expérimentez."
 
 **Défis au choix** :
 
@@ -154,7 +213,7 @@ Laisser les étudiants appliquer librement les outils et la méthodologie sur un
 ---
 
 <a id="j2-debrief"></a>
-## 16h05 – Fin : Débrief final
+## 16h45 – 17h : Débrief final
 
 ### La règle à retenir
 

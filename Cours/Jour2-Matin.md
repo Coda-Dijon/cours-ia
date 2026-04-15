@@ -302,13 +302,57 @@ On fera un exercice de session d'échange ensemble en cours — pas besoin de le
 
 ---
 
-<a id="j2-rules"></a>
-## 11h00 – 11h30 : Rules, outils et agents — tour d'horizon complet
+<a id="j2-agents"></a>
+## 11h00 – 11h45 : Du LLM à l'agent — rules, outils, orchestration
 
 ### Objectif pédagogique
-Comprendre les mécanismes qui permettent de donner un contexte *persistant* à l'IA, connaître le panorama des outils disponibles, et découvrir les concepts d'agents et d'orchestration.
+Faire la différence entre un **LLM nu** (une machine à texte) et un **agent** (un LLM qui agit dans un environnement). Comprendre que les rules, les outils et la boucle d'exécution sont les briques qui transforment l'un en l'autre. Donner un aperçu de l'orchestration multi-agents comme direction du métier.
 
-### Les rules (fichiers de règles)
+### Découpage (45 min)
+
+- **11h00 – 11h10** · LLM basique vs agent — les briques
+- **11h10 – 11h25** · Rules = la mémoire long-terme de l'agent
+- **11h25 – 11h40** · Orchestration multi-agents — le futur proche
+- **11h40 – 11h45** · Transition vers l'exercice 2
+
+---
+
+### 11h00 – 11h10 · LLM basique vs agent (10 min)
+
+#### Point de départ : un LLM, c'est quoi déjà ?
+
+Jusqu'ici, dans ce cours, on a parlé des LLM comme de grosses machines à texte : `prompt → texte`. Pas d'état, pas d'outils, pas de mémoire entre deux appels. Un LLM "nu", c'est ça. C'est ce qu'il y a dans un chatbot comme ChatGPT en version basique : chaque question est traitée comme un tour de parole isolé, et la seule mémoire, c'est l'historique de la conversation qu'on lui re-fournit à chaque fois.
+
+#### Un agent, c'est un LLM qui agit
+
+Un **agent**, c'est un LLM branché sur trois choses en plus :
+
+1. **Des outils** (tools) — des fonctions qu'il peut appeler : lire un fichier, écrire un fichier, exécuter une commande shell, faire une recherche web, etc.
+2. **Une boucle de décision** — il observe le résultat d'une action, décide quoi faire ensuite, et recommence. Observe → décide → agit → re-observe.
+3. **Une mémoire** — à court terme (la conversation en cours) et à long terme (des fichiers de rules, des préférences persistées).
+
+Schématiquement :
+
+```
+LLM nu       : prompt → texte
+Agent        : but → [observe → décide → agit → observe → décide → …] → résultat
+```
+
+#### Vous avez déjà utilisé un agent
+
+Question directe aux étudiants : **"Hier après-midi, quand Gemini CLI a lu vos fichiers PHP, modifié votre code et exécuté vos scripts tout seul, c'était encore un chatbot ?"**
+
+Non. C'était un agent. Gemini CLI, Claude Code, Cursor — ce ne sont pas des chatbots habillés en IDE. Ce sont des **agents de code** : des LLM qui ont des outils, une boucle, et accès à votre système de fichiers.
+
+Ce qui a changé en deux ans, ce n'est pas les modèles — c'est qu'on a arrêté de les utiliser comme des chatbots et qu'on a commencé à leur donner les mains.
+
+---
+
+### 11h10 – 11h25 · Rules = la mémoire long-terme de l'agent (15 min)
+
+Si un agent est un LLM avec des outils et une mémoire, alors les **rules** qu'on va voir maintenant, ce n'est pas un "truc en plus" — c'est **la mémoire long-terme de votre agent**. C'est ce qui lui dit qui vous êtes, sur quoi vous travaillez, et comment vous aimez coder, à chaque nouvelle session.
+
+#### Les rules (fichiers de règles)
 
 **Ce que c'est** : un fichier de texte (souvent en markdown) qui donne des instructions permanentes à l'IA. Comme un brief qu'on donnerait à un nouvel employé.
 
@@ -457,151 +501,77 @@ Quand on dit que Gemini CLI est un "agent", c'est parce qu'il ne fait pas que di
 
 C'est cette combinaison lecture + écriture + exécution qui fait la différence avec un simple chatbot.
 
-### Les agents et l'orchestration
+---
 
-#### L'agent simple — le mode "agentic"
+### 11h25 – 11h40 · Orchestration multi-agents — le futur proche (15 min)
 
-Au-delà des outils eux-mêmes, le mot "agent" désigne un enchaînement automatisé d'actions. L'IA exécute plusieurs étapes dans un ordre défini, sans intervention humaine entre chaque étape.
+#### Pourquoi un seul agent ne suffit pas
 
-**Exemple concret** :
+Un agent unique, c'est déjà puissant, mais ça touche vite ses limites :
 
-```
-Vous : "Ajoute une fonction reset_card_level qui remet une carte
-        en révision (niveau 0), avec un test."
+1. **Le contexte sature.** Plus l'agent lit de fichiers, plus son contexte se remplit. Au bout d'un moment, il oublie le début de la conversation, ou il confond des choses.
+2. **Pas de spécialisation.** Un agent "touche-à-tout" est moyen partout. Un agent dédié à la sécurité, un autre aux tests, un autre à l'archi — chacun peut être bien meilleur dans son domaine.
+3. **Pas de parallélisation.** Un seul agent fait les choses en série. Si trois sous-tâches sont indépendantes, on perd du temps à les faire l'une après l'autre.
 
-L'IA enchaîne automatiquement :
-1. Lit le fichier functions.php pour voir le code existant
-2. Lit data.php pour comprendre la structure de données
-3. Écrit la fonction reset_card_level dans functions.php
-4. Crée un test
-5. Exécute le test avec php -r "..."
-6. Corrige si le test échoue
-```
+D'où l'idée de faire tourner **plusieurs agents qui collaborent** sur un même projet.
 
-C'est ce que font Gemini CLI et Claude Code quand on leur donne une tâche complexe : ils décomposent, lisent des fichiers, écrivent du code, exécutent des tests — tout seuls. On appelle ça le mode "agentic".
+#### Les patterns d'orchestration
 
-**Démo** : donner cette tâche à Gemini CLI et observer comment il enchaîne les étapes automatiquement.
+Quelques patterns qu'on voit émerger (référence utile à donner aux étudiants curieux : [claude.com/blog/multi-agent-coordination-patterns](https://claude.com/blog/multi-agent-coordination-patterns)) :
 
-#### Les sub-agents — déléguer des sous-tâches
+- **Orchestrateur / workers** — un agent "chef de projet" reçoit la tâche, la décompose, et dispatche les sous-tâches à des agents "workers" spécialisés. Il collecte leurs résultats, les synthétise, et décide de la suite.
+- **Sub-agents** — l'agent principal peut "appeler" un sous-agent pour une tâche ciblée. Le sous-agent a son propre contexte isolé (il ne voit pas tout l'historique) et rapporte un résultat compact. C'est déjà dans Gemini CLI et Claude Code aujourd'hui.
+- **Hand-offs** — un agent passe la main à un autre agent selon l'étape du travail. Exemple : un agent "spec" fait la spécification, il passe la main à un agent "dev" qui code, qui passe la main à un agent "reviewer" qui vérifie.
+- **Parallélisation** — plusieurs agents bossent en parallèle sur des modules indépendants, avec un mécanisme de coordination pour éviter qu'ils s'écrasent mutuellement.
 
-Gemini CLI va plus loin avec les **sub-agents** : des agents spécialisés qui tournent dans leur propre contexte, séparé du contexte principal. L'agent principal peut "appeler" un sub-agent pour une tâche spécifique. Le sub-agent a ses propres instructions, ses propres outils, et il rapporte son résultat à l'agent principal.
+#### Exemple illustratif
 
 ```
-Agent principal (vous lui parlez) :
-  "Ajoute le système de répétition espacée aux flashcards"
+Tâche : "Ajoute le système de répétition espacée aux flashcards."
 
-  → Délègue au sub-agent "analyste" :
-      "Lis tout le code existant et fais-moi un résumé de l'architecture"
-      ← Résultat : résumé de l'architecture
-
-  → Délègue au sub-agent "développeur" :
-      "Voici l'architecture. Implémente les fonctions de répétition espacée."
-      ← Résultat : nouveau code
-
-  → Délègue au sub-agent "testeur" :
-      "Voici le code. Écris et exécute les tests."
-      ← Résultat : rapport de tests
+Orchestrateur décompose :
+  ┌─ Agent "analyste"      → lit le code existant, fait un résumé de l'archi
+  ├─ Agent "spec"           → écrit une spec métier de la fonctionnalité
+  ├─ Agent "dev"            → implémente en suivant la spec et l'archi
+  └─ Agent "testeur"        → écrit et exécute les tests
+           ↓
+  Orchestrateur assemble, vérifie la cohérence, livre le résultat
 ```
 
-L'intérêt : chaque sub-agent a un contexte propre et ciblé. Il ne voit que ce dont il a besoin, ce qui améliore la qualité des réponses (moins de bruit = meilleur résultat).
+Chaque agent a un contexte propre et ciblé : moins de bruit, meilleur résultat.
 
-#### L'orchestration multi-agents — le futur
+#### Ce que ça veut dire pour votre futur métier
 
-On entre dans le territoire avancé, mais c'est important de savoir que ça existe. L'idée : au lieu d'un seul agent qui fait tout, on a **plusieurs agents qui collaborent** :
+- **Les agents deviennent de plus en plus autonomes.** C'est la trajectoire claire de l'industrie.
+- **Le rôle du dev se déplace.** De "celui qui tape le code" vers "celui qui définit les rules, cadre les specs, orchestre les agents, et vérifie les résultats". Vous devenez lead technique d'une équipe d'agents.
+- **Les compétences fondamentales ne changent pas.** Comprendre le code, savoir spécifier un besoin, savoir tester, savoir relire — tout ce qu'on apprend dans ce cours reste la base. C'est même *plus* important, parce que vous êtes le seul humain dans la boucle.
 
-- Un **orchestrateur** (le "chef de projet") qui reçoit la tâche et la décompose
-- Des **agents spécialistes** qui travaillent en parallèle sur des sous-tâches
-- Un **mécanisme de coordination** pour que les agents ne se marchent pas dessus (pas d'édition simultanée du même fichier)
+#### Les limites — à ne pas cacher
 
-Des projets comme Maestro (pour Gemini CLI) permettent déjà de faire tourner 20+ agents spécialisés en parallèle : un pour l'architecture, un pour la sécurité, un pour les tests, un pour la documentation...
+Plus l'agent est autonome, plus il faut vérifier. Un agent peut enchaîner 10 étapes dont 3 mauvaises. Un système multi-agents peut livrer un projet entier avec des bugs subtils dans chaque module. Les problèmes réels aujourd'hui :
 
-**On n'en est pas encore là au quotidien**, mais c'est la direction que prend l'industrie. Ce qui est important à comprendre :
+- **Coût** — chaque agent consomme des tokens, et ça grimpe vite.
+- **Debugging** — quand quelque chose foire dans un système avec 5 agents, trouver *quel* agent a merdé et *pourquoi* est un vrai casse-tête.
+- **Fiabilité** — les agents "partent en vrille" parfois : boucles infinies, décisions absurdes, confiance mal placée.
+- **Coordination** — deux agents qui éditent le même fichier sans se parler, c'est le chaos.
 
-1. **Les agents deviennent de plus en plus autonomes** — la tendance est claire.
-2. **Le rôle du développeur se déplace** : de "celui qui écrit le code" vers "celui qui définit les règles, vérifie les résultats, et orchestre les agents".
-3. **Les compétences fondamentales ne changent pas** : comprendre le code, savoir spécifier un besoin, savoir tester — tout ce qu'on apprend dans ce cours reste la base.
+#### Discussion ouverte (3-4 min si le temps le permet)
 
-> **Attention** : plus l'agent est autonome, plus il faut vérifier le résultat. Un agent peut enchaîner 10 étapes... dont 3 mauvaises. Un système multi-agents peut produire un projet entier... avec des bugs subtils dans chaque module. La relecture humaine reste indispensable.
+Question à lancer aux étudiants :
+
+> "Si dans 3 ans vous arrivez en stage ou en premier job et qu'on vous dit : 'Voilà, tu as une équipe de 5 agents IA qui travaillent pour toi, pilote-les sur ce projet.' — qu'est-ce que vous avez envie de savoir pour ne pas vous planter ?"
+
+Les réponses typiques à faire émerger : savoir lire le code, savoir spécifier clairement, savoir tester, savoir dire "non ce n'est pas ça", garder le contrôle, ne pas faire confiance aveuglément. Toutes ces compétences sont **exactement** celles qu'on travaille dans ce cours.
 
 ---
 
-<a id="j2-workflow"></a>
-## 11h15 – 11h45 : Ton workflow réel
+### 11h40 – 11h45 · Transition vers l'exercice 2 (5 min)
 
-### Objectif pédagogique
-Montrer un cas concret d'utilisation professionnelle de l'IA, avec des exemples réels, et faire comprendre pourquoi les tests sont le filet de sécurité indispensable quand on travaille avec l'IA.
+Phrase de transition à dire aux étudiants :
 
-### Démo courte — Projet client
-
-Montrer (en floutant les infos confidentielles si nécessaire) :
-
-1. **Le fichier de rules** d'un vrai projet — montrer la richesse du contexte donné à l'IA.
-2. **Une session de spec** — comment une discussion avec l'IA aboutit à un document technique clair.
-3. **Un prompt de développement** — avec le contexte, les rules, la spec → le code produit.
-
-### Ce que j'automatise au quotidien (3 exemples)
-
-**Exemple 1 : Génération de CRUD**
-> "Quand j'ai une nouvelle entité à créer (ex : un système de facturation), l'IA me génère le squelette complet en suivant mes rules : migration, modèle, contrôleur, routes, validation. Je passe de 2h à 15 min — mais je relis tout."
-
-**Exemple 2 : Revue de code**
-> "Avant de committer, je fais relire mon diff par l'IA. Elle détecte les incohérences, les oublis de validation, les failles de sécurité basiques. Ça ne remplace pas une vraie revue humaine, mais ça attrape 80% des erreurs bêtes."
-
-**Exemple 3 : Rédaction de tests**
-> "J'écris la fonction, je demande à l'IA de générer les tests unitaires. Elle couvre souvent des cas limites auxquels je n'aurais pas pensé. Je vérifie et j'ajuste, mais ça me fait gagner un temps considérable."
-
-### Les tests : le vrai garde-fou quand on travaille avec l'IA
-
-Vous n'avez pas encore appris à écrire des tests automatisés — et ce n'est pas le sujet du cours. Mais il faut comprendre dès maintenant **pourquoi les tests deviennent encore plus importants** quand on utilise l'IA pour coder.
-
-#### Le problème fondamental
-
-Quand vous écrivez du code vous-même, ligne par ligne, vous comprenez chaque décision. Si un bug arrive, vous avez une intuition de où chercher parce que vous avez construit le raisonnement.
-
-Quand l'IA écrit du code pour vous, vous recevez un bloc de 50 lignes d'un coup. Même si vous le relisez, vous n'avez pas le même niveau de compréhension que si vous l'aviez écrit. Et c'est là que les bugs se cachent — dans les détails que vous n'avez pas questionnés.
-
-**Sans tests, comment savoir que le code fait ce qu'il prétend faire ?**
-
-On ne le sait pas. On fait confiance. Et la confiance, en développement, c'est le meilleur moyen de livrer des bugs.
-
-#### Les tests comme filet de sécurité
-
-Un test, c'est simple dans le principe : on appelle une fonction avec des valeurs connues, et on vérifie que le résultat est celui qu'on attend.
-
-```
-J'appelle calculate_urgency() avec une carte de niveau 2
-    revue il y a 3 jours → j'attends un certain score.
-
-J'appelle record_answer() avec une bonne réponse
-    → je vérifie que le compteur a bien augmenté de 1.
-
-J'appelle load_cards() après une sauvegarde
-    → je vérifie que les données sont les mêmes.
-```
-
-C'est exactement ce que vous avez fait avec `php -r "..."` dans le workflow par phases. Ces petites vérifications manuelles, c'est déjà du test. La version "pro", c'est simplement de les automatiser pour pouvoir les relancer à volonté.
-
-#### Pourquoi c'est crucial avec l'IA
-
-L'IA fait trois choses qui rendent les tests indispensables :
-
-1. **Elle modifie du code existant sans le vouloir.** Quand vous lui demandez d'ajouter une fonctionnalité, elle peut casser quelque chose qui marchait avant. C'est ce qu'on appelle une **régression**. Sans tests, vous ne le découvrez que quand un utilisateur tombe dessus.
-
-2. **Elle gère mal les cas limites.** L'IA produit souvent du code qui fonctionne pour le cas "normal" mais qui plante sur les cas rares : une liste vide, un nombre négatif, un fichier qui n'existe pas. Les tests forcent à vérifier ces cas.
-
-3. **Elle vous donne confiance à tort.** Le code généré a l'air propre, les noms de variables sont parlants, la structure semble logique. Mais "a l'air de marcher" ≠ "marche". Les tests transforment une impression en certitude.
-
-#### L'analogie du parachute
-
-Imaginez que vous sautez d'un avion. L'IA, c'est quelqu'un qui vous a plié votre parachute. Il a l'air compétent, il vous dit que c'est bon, le sac a la bonne forme. Mais est-ce que vous sautez sans vérifier ?
-
-Les tests, c'est la vérification du parachute. On ne saute pas sans.
-
-Plus vous déléguez l'écriture du code à l'IA, plus vous avez besoin de tests pour vérifier le résultat. C'est contre-intuitif : on pourrait croire que l'IA rend les tests moins nécessaires. C'est l'inverse.
-
-### Le message
-
-L'IA est un multiplicateur, pas un remplaçant. Plus vous êtes compétent, plus l'IA vous est utile. Moins vous êtes compétent, plus elle est dangereuse. Et les tests sont ce qui vous permet de faire confiance au code — qu'il soit écrit par vous, par un collègue, ou par une IA.
+> "Dans une heure, quand on reprendra après le déjeuner, vous n'allez plus parler à un chatbot. Vous allez **configurer un agent**. Ses rules, c'est sa mémoire. Sa spec, c'est sa feuille de route. Ses outils, c'est ce qu'il peut faire dans votre projet. Et vous, vous êtes son lead tech. Vous lui dites où aller, vous vérifiez ce qu'il produit, vous le reprenez quand il dérape.
+>
+> C'est exactement le métier qui vous attend dans 2 ou 3 ans. Autant commencer maintenant."
 
 ---
 
@@ -634,6 +604,6 @@ Chaque groupe doit, pendant cette demi-heure :
 
 ---
 
-*Pause déjeuner 12h – 13h*
+*Pause déjeuner 12h – 13h30*
 
 ---
