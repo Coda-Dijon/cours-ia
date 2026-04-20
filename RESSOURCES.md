@@ -11,6 +11,7 @@
 - [AI design tool](https://stitch.withgoogle.com/)
 - [Code review graph](https://github.com/tirth8205/code-review-graph)
 - [Pixel Agents - The game interface where AI agents build real things](https://github.com/pablodelucca/pixel-agents)
+- [AI Coding Agents Matrix](https://coding-agents-matrix.dev/)
 
 ### Claude Code
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code)

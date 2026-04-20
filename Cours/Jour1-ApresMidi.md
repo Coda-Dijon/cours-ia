@@ -208,8 +208,8 @@ Les LLM consomment énormément d'énergie. C'est un sujet que peu de développe
 
 [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)
 
-> Démo ecologits
-[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/
+Démo ecologits
+[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/)
 
 > [ACV Mistral](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai)
 
