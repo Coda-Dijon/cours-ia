@@ -1,7 +1,7 @@
 <a id="j1-analyse"></a>
 ## 13h30 – 14h15 : Analyse collective
 
-### Objectif pédagogique
+## Objectif pédagogique
 Apprendre à lire et critiquer du code généré par IA. Développer le réflexe de ne pas accepter aveuglément ce que l'IA produit.
 
 ### Déroulé
@@ -135,6 +135,7 @@ private static readonly Seq<Rule> Rules = create(
 );
 ```
 
+![API Hallucination](img/claude-hallucination.webp)
 ---
 
 ### 2. Les biais — l'IA reproduit les préjugés de ses données (8 min)
