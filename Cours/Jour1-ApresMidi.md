@@ -102,6 +102,15 @@ Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il es
 
 **Réflexe à acquérir** : face à toute fonction, classe ou feature que vous ne connaissez pas dans le code généré par l'IA, ouvrez php.net et vérifiez. C'est non négociable. Et ne posez jamais une question qui contient déjà la réponse ("c'est bien comme ça, non ?") — l'IA confirmera presque toujours.
 
+- Démo elfes : https://chatgpt.com/share/69e5ddcf-0848-832f-89b4-e71583abc87d
+  - Test à partir de [Day 4 - Calendrier de l'Avent](https://coda-dijon.github.io/advent-2025/?day=04)
+
+```text
+🍪 Elf of the Day: Susanoo with 57177 calories!
+🥈 Then comes Maeve (52791) and Set (52573)
+🎁 Combined snack power of Top 3: 162541 calories!
+```
+
 ---
 
 ### 2. Les biais — l'IA reproduit les préjugés de ses données (8 min)
@@ -138,6 +147,13 @@ C'est **faux**. En PHP, les tableaux sont passés **par copie** par défaut (cop
 Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils apparaissent dans les données :
 
 - **Biais de genre** : si vous demandez à l'IA de générer un profil de développeur, le résultat sera plus souvent masculin. Si vous demandez un profil d'infirmière, plus souvent féminin.
+
+```text
+Génère une photo d'une promotion d'étudiant en psychologie en France
+```
+
+![Fac de psycho](img/fac-psycho.webp)
+
 - **Biais culturels** : les solutions proposées reflètent une perspective majoritairement anglo-saxonne et occidentale. Les normes, les conventions, les exemples sont centrés sur ce contexte.
 - **Biais de représentation** : les exemples de code utilisent souvent des noms comme "John" et "Jane", rarement des prénoms d'autres cultures.
 
@@ -147,15 +163,14 @@ Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils ap
 
 ### 3. Éthique et responsabilité — le code que vous ne maîtrisez pas (10 min)
 
-Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tout développeur utilisant l'IA doit se poser.
-
 #### a) Propriété intellectuelle — à qui appartient le code ?
 
 **Le problème** : les LLM ont été entraînés sur du code publié en ligne — GitHub, Stack Overflow, forums, blogs. Ce code a des licences (MIT, GPL, Apache, propriétaire…). Quand l'IA vous génère du code, est-ce que ce code est "le vôtre" ?
 
 **L'état actuel (2026)** :
 
-- La question juridique n'est pas encore complètement tranchée. Plusieurs procès sont en cours (artistes contre générateurs d'images, développeurs contre Copilot, journalistes contre ChatGPT).
+- La question juridique n'est pas encore complètement tranchée. 
+  - Plusieurs procès sont en cours (artistes contre générateurs d'images, développeurs contre Copilot, journalistes contre ChatGPT).
 - La plupart des entreprises considèrent que le code généré par IA est assimilable au code écrit par le développeur — c'est lui qui est responsable.
 - Certaines licences open source (GPL notamment) pourraient poser problème si l'IA reproduit du code GPL dans un projet propriétaire.
 - GitHub Copilot a un filtre qui bloque les extraits de code correspondant exactement à du code public, mais ce filtre n'est pas parfait.
@@ -185,6 +200,16 @@ Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tou
 - Remplacer les données réelles par des données fictives avant de prompter.
 - Vérifier la politique de confidentialité de l'outil utilisé (certains modèles en API ne réutilisent pas vos données pour l'entraînement, contrairement aux versions gratuites web).
 - En entreprise, utiliser des modèles auto-hébergés ou des API avec des garanties contractuelles de non-rétention.
+
+```json
+{
+  "permissions": {
+    "deny": ["Read(./.env)", "Read(./.env.*)"]
+  }
+}
+```
+
+Plus d'infos [ici](https://claudefa.st/blog/guide/settings-reference).
 
 #### c) Impact environnemental — le coût caché
 
@@ -314,7 +339,6 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 
 ### 5. Atrophie cérébrale ?
 [![Brain on LLM](img/brainonllm-small.webp)](https://www.brainonllm.com/)
-
 
 L’étude examine l’impact cognitif de l’utilisation des modèles de langage (LLM), comme ChatGPT, dans le cadre de la rédaction d’essais. Les chercheurs ont réparti 54 participants en trois groupes : un utilisant un LLM, un utilisant un moteur de recherche, et un sans outil. Après trois sessions, un échange a été effectué (certains passent du LLM au cerveau seul, et inversement).
 
