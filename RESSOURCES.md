@@ -32,6 +32,7 @@
 - [Intelligence artificielle - le vrai coût environnemental de la course à l’IA](https://bonpote.com/intelligence-artificielle-le-vrai-cout-environnemental-de-la-course-a-lia/)
 - [Software Crafsmanship in the AI Era](https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era)
 - [Linux AI Coding Policy](https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst)
+- [Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task](https://www.brainonllm.com/)
 
 ### Frugalité
 - [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)

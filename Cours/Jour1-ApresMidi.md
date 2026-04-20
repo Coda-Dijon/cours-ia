@@ -312,7 +312,42 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 
 ---
 
-### 5. Des retours pas toujours glorieux...
+### 5. Atrophie cérébrale ?
+[![Brain on LLM](img/brainonllm-small.webp)](https://www.brainonllm.com/)
+
+
+L’étude examine l’impact cognitif de l’utilisation des modèles de langage (LLM), comme ChatGPT, dans le cadre de la rédaction d’essais. Les chercheurs ont réparti 54 participants en trois groupes : un utilisant un LLM, un utilisant un moteur de recherche, et un sans outil. Après trois sessions, un échange a été effectué (certains passent du LLM au cerveau seul, et inversement).
+
+Les résultats montrent que l’utilisation d’outils externes influence fortement l’activité cérébrale. Grâce à l’EEG, les chercheurs observent que :
+
+* Le groupe **sans outil** présente la **plus forte activité et connectivité cérébrale**.
+* Le groupe avec **moteur de recherche** montre un **niveau intermédiaire**.
+* Le groupe utilisant un **LLM** présente l’engagement cognitif le **plus faible**.
+
+Lors du changement de conditions :
+
+> Les participants passant du LLM au travail sans outil restent moins engagés cognitivement.
+> Ceux passant du cerveau seul au LLM montrent une meilleure mémoire et une réactivation de certaines zones cérébrales.
+
+Sur le plan qualitatif :
+
+* Les utilisateurs de LLM ressentent moins de “propriété” sur leurs textes.
+* Ils ont plus de difficultés à se souvenir de ce qu’ils viennent d’écrire.
+* Globalement, leurs performances (cognitives, linguistiques et évaluées) sont inférieures à celles du groupe sans outil.
+
+L’étude conclut que, malgré des avantages immédiats, l’usage des LLM pourrait nuire à certains aspects de l’apprentissage, notamment l’engagement mental et la mémorisation.
+
+Cependant, ces résultats restent **préliminaires** :
+
+* L’étude n’a pas encore été évaluée par les pairs.
+* L’échantillon est limité et peu diversifié.
+* Les résultats ne sont pas généralisables à tous les LLM ni à d’autres contextes.
+
+Les auteurs appellent donc à davantage de recherches pour mieux comprendre l’impact à long terme des outils d’IA sur l’apprentissage, notamment sur la mémoire, la créativité et la qualité d’écriture.
+
+---
+
+### 6. Des retours pas toujours glorieux...
 RedOX OS :
 
 ![redox-os.webp](img/redox-os.webp)
