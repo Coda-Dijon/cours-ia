@@ -11,6 +11,7 @@
 - [AI design tool](https://stitch.withgoogle.com/)
 - [Code review graph](https://github.com/tirth8205/code-review-graph)
 - [Pixel Agents - The game interface where AI agents build real things](https://github.com/pablodelucca/pixel-agents)
+- [AI Coding Agents Matrix](https://coding-agents-matrix.dev/)
 
 ### Claude Code
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code)
@@ -31,6 +32,8 @@
 - [Impact de l’IA](https://www.lemonde.fr/economie/article/2025/12/26/comment-l-ia-devore-la-planete_6659449_3234.html)
 - [Intelligence artificielle - le vrai coût environnemental de la course à l’IA](https://bonpote.com/intelligence-artificielle-le-vrai-cout-environnemental-de-la-course-a-lia/)
 - [Software Crafsmanship in the AI Era](https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era)
+- [Linux AI Coding Policy](https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst)
+- [Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task](https://www.brainonllm.com/)
 
 ### Frugalité
 - [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)

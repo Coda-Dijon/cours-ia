@@ -85,7 +85,8 @@ Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrèt
 
 ### 1. Les hallucinations (8 min)
 
-**Définition** : l'IA génère du contenu faux avec la même assurance que du contenu vrai. Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il est *fondamental* — il découle directement du fonctionnement qu'on a vu ce matin.
+**Définition** : l'IA génère du contenu faux avec la même assurance que du contenu vrai. 
+Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il est *fondamental* — il découle directement du fonctionnement qu'on a vu ce matin.
 
 **Rappel du mécanisme** : le modèle prédit le token le plus probable. S'il a vu beaucoup de textes mentionnant "la fonction PHP array_flatten()", il peut la proposer même si elle n'existe pas. Le modèle ne distingue pas "j'ai vu ça dans la doc officielle" de "j'ai vu ça dans un post de blog erroné". Pour lui, tout est un pattern statistique.
 
@@ -97,9 +98,42 @@ Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrèt
 - **Mélange de langages** : l'IA écrit du PHP avec une syntaxe JavaScript (ex: `const` au lieu de `define`, `let` au lieu de `$var`), surtout quand le contexte mélange plusieurs langages.
 - **Versions fantaisistes** : "Depuis PHP 8.3, vous pouvez utiliser X" — sauf que X n'existe dans aucune version de PHP.
 
-**Exercice rapide en live** : il peut arriver que l'intervenant montre en direct des exemples qui révèlent les failles du raisonnement par tokens — comptage de lettres, prémisses fausses acceptées sans broncher, fonctions PHP inventées de toutes pièces. Le but est de montrer que l'IA ne vérifie ni les prémisses ni les faits, et qu'elle peut répondre faux avec une assurance totale.
-
 **Réflexe à acquérir** : face à toute fonction, classe ou feature que vous ne connaissez pas dans le code généré par l'IA, ouvrez php.net et vérifiez. C'est non négociable. Et ne posez jamais une question qui contient déjà la réponse ("c'est bien comme ça, non ?") — l'IA confirmera presque toujours.
+
+- Démo elfes : https://chatgpt.com/share/69e5ddcf-0848-832f-89b4-e71583abc87d
+  - Test à partir de [Day 4 - Calendrier de l'Avent](https://coda-dijon.github.io/advent-2025/?day=04)
+
+```text
+🍪 Elf of the Day: Susanoo with 57177 calories!
+🥈 Then comes Maeve (52791) and Set (52573)
+🎁 Combined snack power of Top 3: 162541 calories!
+```
+
+Exemple sur du code :
+[![TDD Example](img/tdd-example.webp)](https://goatreview.com/evolving-existing-code-through-tdd-a-password-validator-case-study/)
+
+```csharp
+// From this
+
+private static readonly Seq<Rule> Rules = Seq.create(
+    new Rule("^.{8,}$", TooShort),
+    new Rule(".*[A-Z].*", NoCapitalLetter),
+    new Rule(".*[a-z].*", NoLowerLetter),
+    new Rule(".*[0-9].*", NoNumber),
+    new Rule(".*[.*#@$%&].*", NoSpecialCharacter),
+    new Rule("^[a-zA-Z0-9.*#@$%&]+$", InvalidCharacter)
+)
+
+// To this
+private static readonly Seq<Rule> Rules = create(
+    new Rule(@"^.{8,}$", "Too short"), // "^.{8,}$"
+    new Rule(@"[A-Z]", "No capital letter"), // ".*[A-Z].*"
+    new Rule(@"[a-z]", "No lower letter"), // ".*[a-z].*"
+    new Rule(@"\d", "No number"), // ".*[0-9].*"
+    new Rule(@"[^A-Za-z0-9]", "No special character"), // ".*[.*#@$%&].*"
+    new Rule(@"^[A-Za-z0-9!@#$%^&*()_+{}\[\]:;""'<,>.?/\|\\`~ -]+$", "Invalid character") // "^[a-zA-Z0-9.*#@$%&]+$"
+);
+```
 
 ---
 
@@ -137,6 +171,13 @@ C'est **faux**. En PHP, les tableaux sont passés **par copie** par défaut (cop
 Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils apparaissent dans les données :
 
 - **Biais de genre** : si vous demandez à l'IA de générer un profil de développeur, le résultat sera plus souvent masculin. Si vous demandez un profil d'infirmière, plus souvent féminin.
+
+```text
+Génère une photo d'une promotion d'étudiant en psychologie en France
+```
+
+![Fac de psycho](img/fac-psycho.webp)
+
 - **Biais culturels** : les solutions proposées reflètent une perspective majoritairement anglo-saxonne et occidentale. Les normes, les conventions, les exemples sont centrés sur ce contexte.
 - **Biais de représentation** : les exemples de code utilisent souvent des noms comme "John" et "Jane", rarement des prénoms d'autres cultures.
 
@@ -146,15 +187,14 @@ Les LLM reproduisent aussi les biais présents dans la société, tels qu'ils ap
 
 ### 3. Éthique et responsabilité — le code que vous ne maîtrisez pas (10 min)
 
-Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tout développeur utilisant l'IA doit se poser.
-
 #### a) Propriété intellectuelle — à qui appartient le code ?
 
 **Le problème** : les LLM ont été entraînés sur du code publié en ligne — GitHub, Stack Overflow, forums, blogs. Ce code a des licences (MIT, GPL, Apache, propriétaire…). Quand l'IA vous génère du code, est-ce que ce code est "le vôtre" ?
 
 **L'état actuel (2026)** :
 
-- La question juridique n'est pas encore complètement tranchée. Plusieurs procès sont en cours (artistes contre générateurs d'images, développeurs contre Copilot, journalistes contre ChatGPT).
+- La question juridique n'est pas encore complètement tranchée. 
+  - Plusieurs procès sont en cours (artistes contre générateurs d'images, développeurs contre Copilot, journalistes contre ChatGPT).
 - La plupart des entreprises considèrent que le code généré par IA est assimilable au code écrit par le développeur — c'est lui qui est responsable.
 - Certaines licences open source (GPL notamment) pourraient poser problème si l'IA reproduit du code GPL dans un projet propriétaire.
 - GitHub Copilot a un filtre qui bloque les extraits de code correspondant exactement à du code public, mais ce filtre n'est pas parfait.
@@ -185,6 +225,16 @@ Ce bloc est crucial. Il dépasse le technique pour aborder les questions que tou
 - Vérifier la politique de confidentialité de l'outil utilisé (certains modèles en API ne réutilisent pas vos données pour l'entraînement, contrairement aux versions gratuites web).
 - En entreprise, utiliser des modèles auto-hébergés ou des API avec des garanties contractuelles de non-rétention.
 
+```json
+{
+  "permissions": {
+    "deny": ["Read(./.env)", "Read(./.env.*)"]
+  }
+}
+```
+
+Plus d'infos [ici](https://claudefa.st/blog/guide/settings-reference).
+
 #### c) Impact environnemental — le coût caché
 
 Les LLM consomment énormément d'énergie. C'est un sujet que peu de développeurs abordent, mais qui est important.
@@ -194,19 +244,21 @@ Les LLM consomment énormément d'énergie. C'est un sujet que peu de développe
 **Quelques ordres de grandeur** :
 
 - L'entraînement de GPT-4 a consommé environ l'équivalent de la consommation annuelle de plusieurs centaines de foyers.
-- Une requête à un LLM consomme environ 10x plus d'énergie qu'une recherche Google classique.
+- Une requête à un LLM consomme environ `10x` plus d'énergie qu'une recherche Google classique.
 - Les data centers nécessaires consomment des quantités massives d'eau pour le refroidissement.
 
 **Ce que ça implique pour les étudiants** :
 
-- Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
-- Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
+- Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. 
+  - Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
+- Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. 
+  - Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
 - L'efficacité de vos prompts n'est pas seulement une question de productivité, c'est aussi une question de responsabilité.
 
 [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)
 
-> Démo ecologits
-[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/
+Démo ecologits
+[![Ecologits calculator](img/ecologits.webp)](https://ecologits.ai/)
 
 > [ACV Mistral](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai)
 
@@ -273,6 +325,8 @@ function find_user($name) {
 
 **La règle** : si vous ne comprenez pas le code assez bien pour le débugger, le sécuriser et le maintenir, vous ne devriez pas le mettre en production.
 
+[![Linux Coding Assistant Policy](img/linux-policy.webp)](https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst)
+
 #### e) L'IA et la triche — l'éléphant dans la pièce
 
 Parlons-en ouvertement : est-ce que utiliser l'IA pour coder, c'est de la "triche" ?
@@ -304,6 +358,47 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 - "Explique la fonction `php_quantum_sort()` en PHP" (fonction totalement fictive, mais explication convaincante)
 
 > **Transition** : "OK, on voit que l'IA a des limites techniques sérieuses et que son utilisation soulève des questions éthiques importantes. Mais est-ce que ça veut dire qu'il ne faut jamais l'utiliser ? Non. La question, c'est *quand* l'utiliser et *quand* la laisser de côté."
+
+---
+
+### 5. Atrophie cérébrale ?
+[![Brain on LLM](img/brainonllm-small.webp)](https://www.brainonllm.com/)
+
+L’étude examine l’impact cognitif de l’utilisation des modèles de langage (LLM), comme ChatGPT, dans le cadre de la rédaction d’essais. Les chercheurs ont réparti 54 participants en trois groupes : un utilisant un LLM, un utilisant un moteur de recherche, et un sans outil. Après trois sessions, un échange a été effectué (certains passent du LLM au cerveau seul, et inversement).
+
+Les résultats montrent que l’utilisation d’outils externes influence fortement l’activité cérébrale. Grâce à l’EEG, les chercheurs observent que :
+
+* Le groupe **sans outil** présente la **plus forte activité et connectivité cérébrale**.
+* Le groupe avec **moteur de recherche** montre un **niveau intermédiaire**.
+* Le groupe utilisant un **LLM** présente l’engagement cognitif le **plus faible**.
+
+Lors du changement de conditions :
+
+> Les participants passant du LLM au travail sans outil restent moins engagés cognitivement.
+> Ceux passant du cerveau seul au LLM montrent une meilleure mémoire et une réactivation de certaines zones cérébrales.
+
+Sur le plan qualitatif :
+
+* Les utilisateurs de LLM ressentent moins de “propriété” sur leurs textes.
+* Ils ont plus de difficultés à se souvenir de ce qu’ils viennent d’écrire.
+* Globalement, leurs performances (cognitives, linguistiques et évaluées) sont inférieures à celles du groupe sans outil.
+
+L’étude conclut que, malgré des avantages immédiats, l’usage des LLM pourrait nuire à certains aspects de l’apprentissage, notamment l’engagement mental et la mémorisation.
+
+Cependant, ces résultats restent **préliminaires** :
+
+* L’étude n’a pas encore été évaluée par les pairs.
+* L’échantillon est limité et peu diversifié.
+* Les résultats ne sont pas généralisables à tous les LLM ni à d’autres contextes.
+
+Les auteurs appellent donc à davantage de recherches pour mieux comprendre l’impact à long terme des outils d’IA sur l’apprentissage, notamment sur la mémoire, la créativité et la qualité d’écriture.
+
+---
+
+### 6. Des retours pas toujours glorieux...
+RedOX OS :
+
+![redox-os.webp](img/redox-os.webp)
 
 ---
 
