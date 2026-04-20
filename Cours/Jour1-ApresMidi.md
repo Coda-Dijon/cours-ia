@@ -98,8 +98,6 @@ Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il es
 - **Mélange de langages** : l'IA écrit du PHP avec une syntaxe JavaScript (ex: `const` au lieu de `define`, `let` au lieu de `$var`), surtout quand le contexte mélange plusieurs langages.
 - **Versions fantaisistes** : "Depuis PHP 8.3, vous pouvez utiliser X" — sauf que X n'existe dans aucune version de PHP.
 
-**Exercice rapide en live** : il peut arriver que l'intervenant montre en direct des exemples qui révèlent les failles du raisonnement par tokens — comptage de lettres, prémisses fausses acceptées sans broncher, fonctions PHP inventées de toutes pièces. Le but est de montrer que l'IA ne vérifie ni les prémisses ni les faits, et qu'elle peut répondre faux avec une assurance totale.
-
 **Réflexe à acquérir** : face à toute fonction, classe ou feature que vous ne connaissez pas dans le code généré par l'IA, ouvrez php.net et vérifiez. C'est non négociable. Et ne posez jamais une question qui contient déjà la réponse ("c'est bien comme ça, non ?") — l'IA confirmera presque toujours.
 
 - Démo elfes : https://chatgpt.com/share/69e5ddcf-0848-832f-89b4-e71583abc87d
@@ -109,6 +107,32 @@ Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il es
 🍪 Elf of the Day: Susanoo with 57177 calories!
 🥈 Then comes Maeve (52791) and Set (52573)
 🎁 Combined snack power of Top 3: 162541 calories!
+```
+
+Exemple sur du code :
+[![TDD Example](img/tdd-example.webp)](https://goatreview.com/evolving-existing-code-through-tdd-a-password-validator-case-study/)
+
+```csharp
+// From this
+
+private static readonly Seq<Rule> Rules = Seq.create(
+    new Rule("^.{8,}$", TooShort),
+    new Rule(".*[A-Z].*", NoCapitalLetter),
+    new Rule(".*[a-z].*", NoLowerLetter),
+    new Rule(".*[0-9].*", NoNumber),
+    new Rule(".*[.*#@$%&].*", NoSpecialCharacter),
+    new Rule("^[a-zA-Z0-9.*#@$%&]+$", InvalidCharacter)
+)
+
+// To this
+private static readonly Seq<Rule> Rules = create(
+    new Rule(@"^.{8,}$", "Too short"), // "^.{8,}$"
+    new Rule(@"[A-Z]", "No capital letter"), // ".*[A-Z].*"
+    new Rule(@"[a-z]", "No lower letter"), // ".*[a-z].*"
+    new Rule(@"\d", "No number"), // ".*[0-9].*"
+    new Rule(@"[^A-Za-z0-9]", "No special character"), // ".*[.*#@$%&].*"
+    new Rule(@"^[A-Za-z0-9!@#$%^&*()_+{}\[\]:;""'<,>.?/\|\\`~ -]+$", "Invalid character") // "^[a-zA-Z0-9.*#@$%&]+$"
+);
 ```
 
 ---
