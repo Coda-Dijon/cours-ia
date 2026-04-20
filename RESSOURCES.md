@@ -31,6 +31,7 @@
 - [Impact de l’IA](https://www.lemonde.fr/economie/article/2025/12/26/comment-l-ia-devore-la-planete_6659449_3234.html)
 - [Intelligence artificielle - le vrai coût environnemental de la course à l’IA](https://bonpote.com/intelligence-artificielle-le-vrai-cout-environnemental-de-la-course-a-lia/)
 - [Software Crafsmanship in the AI Era](https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era)
+- [Linux AI Coding Policy](https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst)
 
 ### Frugalité
 - [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)

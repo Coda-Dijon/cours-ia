@@ -85,7 +85,8 @@ Mettre des mots théoriques sur ce que les étudiants viennent de vivre concrèt
 
 ### 1. Les hallucinations (8 min)
 
-**Définition** : l'IA génère du contenu faux avec la même assurance que du contenu vrai. Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il est *fondamental* — il découle directement du fonctionnement qu'on a vu ce matin.
+**Définition** : l'IA génère du contenu faux avec la même assurance que du contenu vrai. 
+Elle ne "sait" pas qu'elle ne sait pas. C'est le problème n°1 des LLM et il est *fondamental* — il découle directement du fonctionnement qu'on a vu ce matin.
 
 **Rappel du mécanisme** : le modèle prédit le token le plus probable. S'il a vu beaucoup de textes mentionnant "la fonction PHP array_flatten()", il peut la proposer même si elle n'existe pas. Le modèle ne distingue pas "j'ai vu ça dans la doc officielle" de "j'ai vu ça dans un post de blog erroné". Pour lui, tout est un pattern statistique.
 
@@ -194,13 +195,15 @@ Les LLM consomment énormément d'énergie. C'est un sujet que peu de développe
 **Quelques ordres de grandeur** :
 
 - L'entraînement de GPT-4 a consommé environ l'équivalent de la consommation annuelle de plusieurs centaines de foyers.
-- Une requête à un LLM consomme environ 10x plus d'énergie qu'une recherche Google classique.
+- Une requête à un LLM consomme environ `10x` plus d'énergie qu'une recherche Google classique.
 - Les data centers nécessaires consomment des quantités massives d'eau pour le refroidissement.
 
 **Ce que ça implique pour les étudiants** :
 
-- Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
-- Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
+- Utiliser l'IA pour tout et n'importe quoi a un coût environnemental. 
+  - Quand vous pouvez résoudre un problème en lisant la documentation PHP en 2 minutes, c'est mieux que de lancer un prompt qui va mobiliser un GPU.
+- Ce n'est pas un argument pour ne pas utiliser l'IA — c'est un argument pour l'utiliser *intelligemment*. 
+  - Un prompt bien formulé qui donne le bon résultat du premier coup consomme beaucoup moins qu'une série de 15 prompts vagues et itérations inutiles.
 - L'efficacité de vos prompts n'est pas seulement une question de productivité, c'est aussi une question de responsabilité.
 
 [Référentiel de bonnes pratiques d'utilisation de l'IA générative](https://ria.greenit.fr/fr)
@@ -273,6 +276,8 @@ function find_user($name) {
 
 **La règle** : si vous ne comprenez pas le code assez bien pour le débugger, le sécuriser et le maintenir, vous ne devriez pas le mettre en production.
 
+[![Linux Coding Assistant Policy](img/linux-policy.webp)](https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst)
+
 #### e) L'IA et la triche — l'éléphant dans la pièce
 
 Parlons-en ouvertement : est-ce que utiliser l'IA pour coder, c'est de la "triche" ?
@@ -304,6 +309,13 @@ C'est une forme d'effet Dunning-Kruger artificiel : l'IA est maximalement confia
 - "Explique la fonction `php_quantum_sort()` en PHP" (fonction totalement fictive, mais explication convaincante)
 
 > **Transition** : "OK, on voit que l'IA a des limites techniques sérieuses et que son utilisation soulève des questions éthiques importantes. Mais est-ce que ça veut dire qu'il ne faut jamais l'utiliser ? Non. La question, c'est *quand* l'utiliser et *quand* la laisser de côté."
+
+---
+
+### 5. Des retours pas toujours glorieux...
+RedOX OS :
+
+![redox-os.webp](img/redox-os.webp)
 
 ---
 
