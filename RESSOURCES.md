@@ -44,16 +44,18 @@
 - [The Hidden Costs of Coding With Generative AI](https://sloanreview.mit.edu/article/the-hidden-costs-of-coding-with-generative-ai/)
 - [Mistral et empreinte environnemental](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai)
 
+### Vidéos
+- [Agentic AI Coding: Best Practice Patterns for Speed with Quality - Adam Tornhill](https://youtu.be/AQWyhqzGHaU?si=8s8sDK_blO0QGA9o)
+
 ### Learning
 
 - Cours + certification :
     - Complete guide to Building Skill for Claude : https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf
     - AI Engineering hub : https://github.com/patchy631/ai-engineering-hub
 
-https://x.com/EloiLJF/status/2031718851004465177
 
+### Claude Best Practices
 The creator of Claude Code just published a thread that's going viral.
-
 4 million views. 35,000 likes.
 
 Boris Cherny and his team shared how they use Claude Code daily. Here are the key learnings – for anyone looking to get more out of AI coding agents:
@@ -68,11 +70,9 @@ Complex tasks always start with a plan. Pour energy into planning → Claude imp
 
 𝟯. 𝗠𝗮𝗶𝗻𝘁𝗮𝗶𝗻 𝗖𝗟𝗔𝗨𝗗𝗘.𝗺𝗱
 
-After every correction: "Update your
+After every correction: "Update your [**CLAUDE.md**](http://claude.md/)"
 
-[**CLAUDE.md**](http://claude.md/)
-
-so you don't make that mistake again." Claude writes excellent rules for itself. Mistake rate drops measurably over time.
+so you don't make that mistake again. "Claude writes excellent rules for itself. Mistake rate drops measurably over time.
 
 𝟰. 𝗕𝘂𝗶𝗹𝗱 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝘀𝗸𝗶𝗹𝗹𝘀
 
@@ -106,4 +106,4 @@ You speak 3x faster than you type. Prompts automatically get more detailed. (fn 
 
 Enable "Explanatory" output style, generate HTML presentations or ASCII diagrams. Claude explains the why behind changes.
 
-![claude-cheat-sheet.jpeg](attachment:fd023a94-db1b-449c-a638-9b56372561d6:claude-cheat-sheet.jpeg)
+![Claude Cheat Sheet](Cours/img/claude-cheat-sheet.webp)
