@@ -54,55 +54,9 @@ Comprendre que le contexte est *la* variable clé qui détermine la qualité des
 
 ### Pourquoi le contexte est la clé
 
-L'IA ne connaît rien de votre projet. À chaque prompt, elle part de zéro (ou presque). Si vous ne lui donnez pas de contexte, elle *invente* le contexte.
+L'IA ne connaît rien de votre projet. Sans contexte, elle invente — structure de données, conventions, périmètre. D'où les incohérences d'hier.
 
-Hier, quand vous avez demandé "ajoute un système de répétition espacée" sans préciser :
-
-- La structure de données existante
-- Le langage et sa version
-- Les conventions du projet
-- Ce qui existe déjà
-
-…l'IA a inventé tout ça. D'où les incohérences, les structures de données qui changent d'un prompt à l'autre, et le code qui ne s'intègre pas au reste.
-
-> **Rappel du matin d'hier** : un LLM prédit le prochain token à partir de *tout ce qu'il voit* dans la fenêtre de contexte. Plus ce que vous fournissez est précis, plus les prédictions tombent juste. Moins vous fournissez, plus l'IA "moyenne" sur ses données d'entraînement — et on retombe dans les biais et les hallucinations.
-
-### Démo side-by-side
-
-**Même prompt, deux contextes différents.**
-
-#### Sans contexte :
-
-```
-Ajoute un score à mon outil de flashcards PHP.
-```
-
-→ L'IA va probablement générer de l'OOP, choisir sa propre structure de stockage, inventer des classes `ScoreManager`, `ReviewSession`, etc. Exactement ce qu'on a vu hier.
-
-#### Avec contexte :
-
-```
-Je travaille sur un outil de flashcards en PHP CLI.
-Voici la structure de mes cartes (tableaux associatifs) :
-$card = ['question' => '...', 'answer' => '...', 'deck' => 'PHP Bases'];
-
-Les cartes sont stockées dans un fichier cards.json.
-Les fonctions existantes sont dans functions.php :
-- display_card($card, $show_answer) : affiche une carte
-- get_user_input($prompt) : lit une saisie utilisateur
-
-Crée une fonction record_answer(array &$cards, int $index, bool $correct) qui :
-- Ajoute un champ 'times_correct' ou 'times_wrong' à la carte (incrémente)
-- Ajoute un champ 'last_reviewed' avec la date du jour (format 'Y-m-d')
-- Sauvegarde le fichier JSON après modification
-- N'utilise que des fonctions PHP natives
-
-Le code doit être simple, sans OOP, avec des commentaires en français.
-```
-
-→ Le résultat sera cohérent avec le projet existant, respectera les conventions, et sera compréhensible.
-
-Faire la démo en live dans Gemini CLI : lancer les deux prompts dans des sessions séparées et afficher les résultats côte à côte. Le contraste est saisissant.
+> **Rappel** : un LLM prédit le prochain token à partir de ce qu'il voit. Plus le contexte est précis, plus les prédictions tombent juste.
 
 ### Les composants d'un bon contexte
 
@@ -115,26 +69,49 @@ Un bon contexte =
   + Le format attendu (style de code, langue des commentaires)
 ```
 
-Chaque composant oublié, c'est une zone d'ombre que l'IA va combler à sa façon — et souvent mal.
+Chaque composant oublié = une zone d'ombre que l'IA va combler à sa façon.
 
-### Mini-exercice comparatif (15 min)
+### Exercice : le one-shot parfait (20 min)
 
-Pour que la différence soit *vécue* et pas juste expliquée, on fait l'exercice en direct.
+**Objectif** : refaire l'outil de flashcards d'hier **en un seul prompt**, depuis une session vierge.
 
-**Consigne (en binôme, 10 min)** :
+**Consigne** :
 
-> "Reprenez un des prompts que vous avez utilisés hier — celui dont vous êtes le moins fier. Réécrivez-le en deux versions :
+> "Un seul prompt, un seul résultat. Deux exigences :
 >
-> - **Version A** : le prompt d'origine, tel quel.
-> - **Version B** : le même prompt, enrichi avec les 5 composants du contexte ci-dessus.
+> 1. **Périmètre fonctionnel complet** — toutes les fonctionnalités d'hier.
+> 2. **Qualité du code** — ce que vous auriez aimé produire à la main (conventions, lisibilité, pas de sur-ingénierie).
 >
-> Lancez les deux versions dans Gemini CLI, l'une après l'autre (session propre entre les deux). Observez les différences : longueur du résultat, cohérence avec votre projet, qualité du code."
+> Si le résultat ne satisfait pas les deux critères, repartez d'une session vierge et itérez sur le *prompt*, pas sur le code."
 
-**Mise en commun (5 min)** : deux ou trois groupes présentent leur comparaison à l'oral. Noter au tableau les différences les plus marquantes : est-ce que l'IA a inventé moins de choses ? Est-ce que le code colle mieux au projet ? Est-ce qu'il est plus court / plus long ? Pourquoi ?
+**Règles** :
 
-L'objectif n'est pas d'écrire le "prompt parfait" — c'est que les étudiants *sentent* dans leur chair que deux prompts qui disent la même chose donnent des résultats radicalement différents selon le contexte fourni.
+- Session vierge par tentative.
+- Pas de correction manuelle ni de prompt de rattrapage.
+- Entre deux tentatives : noter ce qui manquait dans le prompt précédent.
 
-> **Transition** : "Vous voyez la différence ? Et encore, là on fait ça à la main, prompt par prompt. Dans la suite de la matinée, on va voir comment *structurer* ce contexte avec une méthode : prompts itératifs, spec-driven, rules. Et comment transformer un LLM en véritable agent de développement."
+#### Bien formuler un retour entre deux tentatives
+
+Ne dites pas "c'était pas ça". Utilisez le triptyque **ce que j'attendais / ce que l'IA a produit / l'écart** :
+
+```
+Attendu : boucle de jeu simple en procédural.
+Produit : classes OOP avec un FlashcardManager.
+Écart : j'avais oublié de dire "pas d'OOP, code procédural uniquement".
+```
+
+Ce cadre force à identifier ce qui manquait — c'est exactement ce qu'il faut ajouter au prompt suivant.
+
+### Réflexion et discussion (10 min)
+
+Tour de table. Questions pour guider :
+
+- Combien de tentatives avant un résultat satisfaisant ?
+- **Qu'est-ce qui a bien marché** dans le prompt final ? Quels composants du contexte étaient présents ?
+- Qu'est-ce qui manquait systématiquement au début ?
+- Des patterns récurrents entre étudiants ?
+
+> **Transition** : "Quand le contexte est bon, un seul prompt suffit. Mais l'écrire demande de la méthode. Voyons comment la structurer."
 
 ---
 
@@ -146,78 +123,60 @@ L'objectif n'est pas d'écrire le "prompt parfait" — c'est que les étudiants 
 ## 10h45 – 11h15 : Le prompt itératif vs le one-shot
 
 ### Objectif pédagogique
-Comprendre qu'un bon prompt est une *conversation*, pas une commande unique.
+Comprendre qu'un bon prompt est une conversation, pas une commande unique.
 
 ### Le problème du one-shot
 
-C'est ce que les étudiants ont fait hier : un gros prompt → un gros résultat → on copie-colle.
-
-**Pourquoi ça ne marche pas** :
-
-- Le prompt unique essaie de tout spécifier d'un coup → il oublie des choses.
-- L'IA génère beaucoup de code d'un coup → impossible à vérifier.
-- Si un morceau est mauvais, on jette tout et on recommence.
-- On ne comprend pas le *cheminement* du code.
+Un prompt unique qui spécifie tout d'un coup oublie toujours quelque chose : format des données, conventions, cas limites, gestion d'erreurs. Et on ne le voit qu'après, quand le code ne fait pas ce qu'on voulait. L'IA génère beaucoup de code d'un seul tenant, impossible à vérifier. Si un morceau est mauvais, on jette tout.
 
 ### L'approche itérative
 
 ```
-Prompt 1 : "Je veux un système de score pour mes flashcards. Quels éléments faut-il ?"
-        → L'IA propose une structure. On discute.
-
-Prompt 2 : "OK, je garde cette structure. Écris la fonction record_answer($card, $correct)."
-        → On vérifie une petite fonction. On valide.
-
-Prompt 3 : "Maintenant get_card_stats, avec le taux de réussite par carte."
-        → Incrémental. Chaque étape est vérifiable.
-
-Prompt 4 : "Refactorise pour que le score soit persisté dans le JSON avec les cartes."
-        → On améliore par itération, pas par réécriture totale.
+Prompt 1 : "Je veux un système de score. Quels éléments faut-il ?"
+        → On discute la structure.
+Prompt 2 : "OK, écris record_answer($card, $correct)."
+        → Une petite fonction à vérifier.
+Prompt 3 : "Maintenant get_card_stats, avec le taux de réussite."
+        → Incrémental, vérifiable.
+Prompt 4 : "Refactorise pour persister le score dans le JSON."
+        → Amélioration, pas réécriture totale.
 ```
 
-### Ce qui se passe quand on fait un seul prompt
-
-Le piège du one-shot, c'est qu'on oublie toujours des informations. On pense avoir tout dit, mais en réalité on a laissé des zones d'ombre que l'IA va combler à sa façon — souvent mal. Un prompt unique de 10 lignes omet presque toujours le format des données, les conventions du projet, les cas limites, la gestion d'erreurs. Et on ne s'en rend compte qu'après, quand le code ne fait pas ce qu'on voulait.
-
-L'approche itérative résout ça : en découpant en petites étapes, chaque oubli est rattrapé au prompt suivant.
+Chaque oubli est rattrapé au prompt suivant. Chaque morceau est vérifiable.
 
 ### Les bénéfices
 
-- **Compréhension** : on comprend chaque morceau parce qu'on l'a demandé individuellement.
-- **Contrôle** : on peut corriger tôt au lieu de découvrir les problèmes à la fin.
-- **Qualité** : l'IA produit un meilleur code quand le scope est réduit.
-- **Apprentissage** : on apprend en dialoguant, pas en copiant.
+- **Compréhension** : chaque morceau est demandé individuellement.
+- **Contrôle** : on corrige tôt au lieu de découvrir les problèmes à la fin.
+- **Qualité** : l'IA produit mieux quand le scope est réduit.
 
-### Quand ça plante — bien signaler un bug à l'IA (5 min)
+### Exercice : itératif ou one-shot ? (20 min)
 
-L'approche itérative implique que parfois le code généré ne marche pas. La question c'est : comment en parler à l'IA pour qu'elle corrige efficacement ?
+On part d'un outil de flashcards simple déjà fourni : créer/lister des decks, ajouter/supprimer des cartes, session de révision basique.
 
-**Le mauvais réflexe** : "Ça marche pas, corrige."
+**Mission** : ajouter les 7 fonctionnalités suivantes.
 
-→ L'IA ne sait pas *ce qui* ne marche pas. Elle va réécrire le code différemment, en introduisant potentiellement de nouveaux bugs.
+1. **Score par carte** : compteurs bonnes/mauvaises, persistés.
+2. **Historique de révision** : liste des dernières révisions par carte (date + résultat).
+3. **Statistiques par deck** : taux de réussite global, carte la mieux/moins maîtrisée.
+4. **Révision intelligente** : priorité aux cartes faibles et à celles oubliées depuis longtemps.
+5. **Niveau de maîtrise** 0-5 : monte/descend selon la réponse ; les cartes au niveau 5 apparaissent moins souvent.
+6. **Export CSV** des stats d'un deck.
+7. **Réinitialisation** des stats d'un deck (avec confirmation).
 
-**Le bon réflexe** : donner le triptyque **ce que j'attendais / ce qui s'est passé / le message d'erreur** :
+**Consigne** :
 
-```
-La fonction record_answer() ne fonctionne pas.
+> "À vous de choisir : un seul gros prompt qui liste tout, ou itératif, fonctionnalité par fonctionnalité. Faites ce qui vous semble naturel. Débrief dans 20 min."
 
-Ce que j'attendais : quand je réponds "bon" à une carte, son compteur "correct" devrait augmenter de 1 et le score devrait être sauvegardé dans le JSON.
+**Observation (silencieuse) pendant l'exercice** :
 
-Ce qui se passe : le score s'affiche bien pendant la session, mais quand je relance le programme, tout est remis à zéro.
+- Qui fonce sur un gros prompt ? Qui découpe ?
+- Chez les one-shot : les 7 fonctionnalités sont-elles présentes et cohérentes (le niveau de maîtrise influe-t-il vraiment sur la révision intelligente ? score et historique non redondants ?) ?
+- Chez les itératifs : combien de fonctionnalités finies ? Qualité ?
 
-Message d'erreur : il n'y a pas d'erreur PHP, le code s'exécute sans planter.
+**Debrief (5 min)** : à main levée, qui a fait quoi. Puis faire remonter les oublis/incohérences du one-shot et les rattrapages des itératifs.
 
-Voici le code actuel de la fonction :
-[coller la fonction]
-```
-
-**Pourquoi ça marche mieux** :
-
-- L'IA a le contexte complet du bug — elle peut diagnostiquer au lieu de deviner.
-- Le message d'erreur exact (ou l'absence d'erreur) élimine beaucoup d'hypothèses.
-- Ça vous force à *comprendre* le problème avant de demander de l'aide — et parfois, en formulant le bug, vous trouvez la solution vous-même.
-
-> **Règle** : ne collez jamais juste "ça marche pas". C'est aussi vrai avec un collègue humain qu'avec l'IA.
+Le piège est volontaire : 7 fonctionnalités interdépendantes sont presque impossibles à spécifier d'un seul jet.
 
 ---
 
@@ -304,17 +263,17 @@ Le réflexe professionnel, c'est l'inverse : on réfléchit d'abord, on code ens
 - Le contexte de dev (phase 3) doit être "propre" : spec claire, rules en place, code existant fourni.
 - Mélanger les deux pollue le contexte et dégrade la qualité des réponses.
 
-### Démo live (15 min)
+### Exercice : ajouter une fonctionnalité en spec-driven (15 min)
 
-Faire la démo complète du workflow sur un cas concret :
+On reprend l'outil de flashcards et on ajoute **une seule** nouvelle fonctionnalité (au choix : mode examen chronométré, système de tags sur les cartes, import d'un deck depuis un CSV, statistiques hebdomadaires, ou une idée personnelle).
 
-1. Ouvrir un premier contexte Gemini CLI → discuter du système de répétition espacée (spec métier)
-2. Demander un plan d'implémentation découpé en phases
-3. Ouvrir un second contexte → coller le plan + le code existant → implémenter la phase 1
-4. Tester la phase 1 en direct (`php -r "require 'data.php'; var_dump(load_cards());"` pour vérifier les nouvelles métadonnées)
-5. Continuer avec la phase 2
+**Étape 1 — Spec métier (5 min)** : dans un premier contexte Gemini CLI, produire un document de spécification (en markdown, sans code) qui décrit le comportement attendu, les règles métier et les cas limites. Utiliser le template ci-dessous.
 
-Montrer le résultat vs ce que le one-shot du jour 1 aurait donné.
+**Étape 2 — Plan d'implémentation (3 min)** : dans le même contexte, demander à l'IA de transformer la spec en plan découpé en phases testables.
+
+**Étape 3 — Implémentation phase 1 (7 min)** : ouvrir un **nouveau contexte** vierge, coller le code existant + la spec + le plan, demander uniquement la phase 1. Tester avant d'aller plus loin.
+
+L'objectif n'est pas de finir la fonctionnalité — c'est de vivre le workflow complet au moins une fois et de ressentir la différence avec le prompt direct.
 
 #### Template de spec métier
 
